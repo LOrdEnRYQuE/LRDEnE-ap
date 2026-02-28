@@ -1,0 +1,4 @@
+[submodule "apps/desktop/core"]
+	path = apps/desktop/core
+	url = https://github.com/LOrdEnRYQuE/atiq-vscode-fork.git
+	branch = main
