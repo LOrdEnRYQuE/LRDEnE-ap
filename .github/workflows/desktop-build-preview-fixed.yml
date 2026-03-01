@@ -33,20 +33,14 @@ jobs:
           cache: "npm"
           cache-dependency-path: "apps/desktop/core/package-lock.json"
 
-      - name: Build Desktop (npm + gulp)
-        working-directory: apps/desktop/core
-        shell: bash
+      - name: Install Linux build deps
+        if: runner.os == 'Linux'
         run: |
-          set -euxo pipefail
-          mkdir -p .logs
-          npm config set cache "$(pwd)/.npm_cache"
-          npm install 2>&1 | tee .logs/npm-install.log
-
-          # If your fork uses a different compile script, replace this line.
-          # You mentioned compile-build exists; keep it.
-          npm run compile-build 2>&1 | tee .logs/compile.log
-
-          npm run gulp -- ${{ matrix.target }} 2>&1 | tee .logs/gulp.log
+          sudo apt-get update -y
+          sudo apt-get install -y \
+            build-essential g++ \
+            libx11-dev libxkbfile-dev libsecret-1-dev libkrb5-dev \
+            python-is-python3
 
           echo "Build outputs:"
           find . -maxdepth 4 -type f \( -name "*.zip" -o -name "*.tar.gz" -o -name "*.dmg" -o -name "*.exe" -o -name "*.AppImage" \) -print || true
