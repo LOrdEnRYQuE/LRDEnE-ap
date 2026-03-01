@@ -53,7 +53,7 @@ jobs:
 
           # If your fork uses a different compile script, replace this line.
           # You mentioned compile-build exists; keep it.
-          npm run compile-build-without-mangling 2>&1 | tee .logs/compile.log
+          npm run gulp -- compile-build-without-mangling 2>&1 | tee .logs/compile.log
 
           npm run gulp -- ${{ matrix.target }} 2>&1 | tee .logs/gulp.log
 
