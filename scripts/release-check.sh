@@ -9,7 +9,7 @@ echo "🔍 ATiQ Release Check v1.0.1"
 echo "================================"
 
 # Check if VSIX exists
-if [ ! -f "apps/extension/*.vsix" ]; then
+if [ ! -f "apps/extension/atiq-ai-1.0.0-final.vsix" ]; then
     echo "❌ ERROR: No VSIX file found!"
     echo "Run: pnpm --filter atiq-ai build && cd apps/extension && npx @vscode/vsce package --no-dependencies"
     exit 1
@@ -17,7 +17,7 @@ fi
 
 # Check VSIX contents
 echo "📦 Checking VSIX contents..."
-VSIX_FILE=$(find . -name "*.vsix" -type f -exec ls -la {} \; | head -1)
+VSIX_FILE="apps/extension/atiq-ai-1.0.0-final.vsix"
 
 if [ -f "$VSIX_FILE" ]; then
     echo "✅ VSIX file found: $VSIX_FILE"
