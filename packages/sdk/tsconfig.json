@@ -1,9 +1,15 @@
 {
-  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS",
+    "declaration": true,
+    "declarationMap": true,
     "outDir": "lib",
+    "strict": true,
+    "skipLibCheck": true,
+    "baseUrl": ".",
     "paths": {
-      "@atiq/shared": ["../shared/src"]
+      "@atiq/shared": ["../shared/lib"]
     }
   },
   "include": ["src"],

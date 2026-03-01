@@ -8,28 +8,32 @@
     "build": "tsc -p tsconfig.json",
     "start": "node lib/index.js",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "clean": "rm -rf lib build dist"
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate deploy",
+    "prisma:push": "prisma db push",
+    "clean": "rimraf lib dist temp.db",
+    "test": "pnpm clean && prisma generate && vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@atiq/shared": "workspace:*",
     "@fastify/cors": "^10.0.0",
     "@fastify/rate-limit": "^10.0.0",
+    "@prisma/client": "^6.4.0",
     "fastify": "^5.0.0",
     "fastify-plugin": "^5.0.1",
-    "@prisma/client": "^6.4.0",
     "jsonwebtoken": "^9.0.2",
     "openai": "^4.85.4",
-    "stripe": "^17.6.0"
+    "stripe": "^17.6.0",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^22.0.0",
+    "@vitest/coverage-v8": "^2.1.8",
     "prisma": "^6.4.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3",
-    "vitest": "^2.1.8",
-    "@vitest/coverage-v8": "^2.1.8"
+    "vitest": "^2.1.8"
   }
 }

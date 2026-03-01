@@ -16,7 +16,8 @@ export default function VerifyPage() {
     
     const token = searchParams.get("token");
     if (!token) {
-      setError("No verification token found.");
+      // Use setTimeout to avoid synchronous setState in effect
+      setTimeout(() => setError("No verification token found."), 0);
       return;
     }
 

@@ -1,1 +1,0 @@
-{"version":3,"file":"mock.d.ts","sourceRoot":"","sources":["../../../../../../src/lib/ai/mock.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,UAAU,EAAE,iBAAiB,EAAE,aAAa,EAAE,MAAM,YAAY,CAAC;AAE/E,qBAAa,YAAa,YAAW,UAAU;IACtC,MAAM,CAAC,OAAO,EAAE,iBAAiB,GAAG,cAAc,CAAC,aAAa,CAAC;IAalE,QAAQ,CAAC,OAAO,EAAE,iBAAiB,GAAG,OAAO,CAAC,MAAM,CAAC;CAG5D"}

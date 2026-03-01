@@ -22,6 +22,11 @@ const billingRoutes: FastifyPluginAsync = async (app) => {
     const userId = (request as any).userId;
     const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
 
+    // Return 401 for missing authentication
+    if (!userId) {
+      return reply.code(401).send({ error: "Authentication required" }) as any;
+    }
+
     const user = await db.user.findUnique({ 
       where: { id: userId }, 
       include: { stripeCustomer: true } 

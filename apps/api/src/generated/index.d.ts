@@ -79,6 +79,11 @@ export type Subscription = $Result.DefaultSelection<Prisma.$SubscriptionPayload>
  */
 export type WebhookEvent = $Result.DefaultSelection<Prisma.$WebhookEventPayload>
 /**
+ * Model TelemetryEvent
+ * 
+ */
+export type TelemetryEvent = $Result.DefaultSelection<Prisma.$TelemetryEventPayload>
+/**
  * Model VerificationToken
  * 
  */
@@ -331,6 +336,16 @@ export class PrismaClient<
     * ```
     */
   get webhookEvent(): Prisma.WebhookEventDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.telemetryEvent`: Exposes CRUD operations for the **TelemetryEvent** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TelemetryEvents
+    * const telemetryEvents = await prisma.telemetryEvent.findMany()
+    * ```
+    */
+  get telemetryEvent(): Prisma.TelemetryEventDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.verificationToken`: Exposes CRUD operations for the **VerificationToken** model.
@@ -795,6 +810,7 @@ export namespace Prisma {
     StripeCustomer: 'StripeCustomer',
     Subscription: 'Subscription',
     WebhookEvent: 'WebhookEvent',
+    TelemetryEvent: 'TelemetryEvent',
     VerificationToken: 'VerificationToken'
   };
 
@@ -814,7 +830,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "team" | "teamMembership" | "chat" | "edit" | "auditLog" | "securityEvent" | "refreshToken" | "usageCounter" | "usageEvent" | "stripeCustomer" | "subscription" | "webhookEvent" | "verificationToken"
+      modelProps: "user" | "team" | "teamMembership" | "chat" | "edit" | "auditLog" | "securityEvent" | "refreshToken" | "usageCounter" | "usageEvent" | "stripeCustomer" | "subscription" | "webhookEvent" | "telemetryEvent" | "verificationToken"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1780,6 +1796,80 @@ export namespace Prisma {
           }
         }
       }
+      TelemetryEvent: {
+        payload: Prisma.$TelemetryEventPayload<ExtArgs>
+        fields: Prisma.TelemetryEventFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TelemetryEventFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TelemetryEventPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TelemetryEventFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TelemetryEventPayload>
+          }
+          findFirst: {
+            args: Prisma.TelemetryEventFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TelemetryEventPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TelemetryEventFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TelemetryEventPayload>
+          }
+          findMany: {
+            args: Prisma.TelemetryEventFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TelemetryEventPayload>[]
+          }
+          create: {
+            args: Prisma.TelemetryEventCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TelemetryEventPayload>
+          }
+          createMany: {
+            args: Prisma.TelemetryEventCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TelemetryEventCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TelemetryEventPayload>[]
+          }
+          delete: {
+            args: Prisma.TelemetryEventDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TelemetryEventPayload>
+          }
+          update: {
+            args: Prisma.TelemetryEventUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TelemetryEventPayload>
+          }
+          deleteMany: {
+            args: Prisma.TelemetryEventDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TelemetryEventUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TelemetryEventUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TelemetryEventPayload>[]
+          }
+          upsert: {
+            args: Prisma.TelemetryEventUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TelemetryEventPayload>
+          }
+          aggregate: {
+            args: Prisma.TelemetryEventAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTelemetryEvent>
+          }
+          groupBy: {
+            args: Prisma.TelemetryEventGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TelemetryEventGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TelemetryEventCountArgs<ExtArgs>
+            result: $Utils.Optional<TelemetryEventCountAggregateOutputType> | number
+          }
+        }
+      }
       VerificationToken: {
         payload: Prisma.$VerificationTokenPayload<ExtArgs>
         fields: Prisma.VerificationTokenFieldRefs
@@ -1963,6 +2053,7 @@ export namespace Prisma {
     stripeCustomer?: StripeCustomerOmit
     subscription?: SubscriptionOmit
     webhookEvent?: WebhookEventOmit
+    telemetryEvent?: TelemetryEventOmit
     verificationToken?: VerificationTokenOmit
   }
 
@@ -2049,6 +2140,7 @@ export namespace Prisma {
     memberships: number
     auditLogs: number
     securityEvents: number
+    telemetryEvents: number
     refreshTokens: number
     usageCounters: number
   }
@@ -2059,6 +2151,7 @@ export namespace Prisma {
     memberships?: boolean | UserCountOutputTypeCountMembershipsArgs
     auditLogs?: boolean | UserCountOutputTypeCountAuditLogsArgs
     securityEvents?: boolean | UserCountOutputTypeCountSecurityEventsArgs
+    telemetryEvents?: boolean | UserCountOutputTypeCountTelemetryEventsArgs
     refreshTokens?: boolean | UserCountOutputTypeCountRefreshTokensArgs
     usageCounters?: boolean | UserCountOutputTypeCountUsageCountersArgs
   }
@@ -2107,6 +2200,13 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountSecurityEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SecurityEventWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountTelemetryEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TelemetryEventWhereInput
   }
 
   /**
@@ -2349,6 +2449,7 @@ export namespace Prisma {
     memberships?: boolean | User$membershipsArgs<ExtArgs>
     auditLogs?: boolean | User$auditLogsArgs<ExtArgs>
     securityEvents?: boolean | User$securityEventsArgs<ExtArgs>
+    telemetryEvents?: boolean | User$telemetryEventsArgs<ExtArgs>
     refreshTokens?: boolean | User$refreshTokensArgs<ExtArgs>
     usageCounters?: boolean | User$usageCountersArgs<ExtArgs>
     stripeCustomer?: boolean | User$stripeCustomerArgs<ExtArgs>
@@ -2393,6 +2494,7 @@ export namespace Prisma {
     memberships?: boolean | User$membershipsArgs<ExtArgs>
     auditLogs?: boolean | User$auditLogsArgs<ExtArgs>
     securityEvents?: boolean | User$securityEventsArgs<ExtArgs>
+    telemetryEvents?: boolean | User$telemetryEventsArgs<ExtArgs>
     refreshTokens?: boolean | User$refreshTokensArgs<ExtArgs>
     usageCounters?: boolean | User$usageCountersArgs<ExtArgs>
     stripeCustomer?: boolean | User$stripeCustomerArgs<ExtArgs>
@@ -2410,6 +2512,7 @@ export namespace Prisma {
       memberships: Prisma.$TeamMembershipPayload<ExtArgs>[]
       auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
       securityEvents: Prisma.$SecurityEventPayload<ExtArgs>[]
+      telemetryEvents: Prisma.$TelemetryEventPayload<ExtArgs>[]
       refreshTokens: Prisma.$RefreshTokenPayload<ExtArgs>[]
       usageCounters: Prisma.$UsageCounterPayload<ExtArgs>[]
       stripeCustomer: Prisma.$StripeCustomerPayload<ExtArgs> | null
@@ -2822,6 +2925,7 @@ export namespace Prisma {
     memberships<T extends User$membershipsArgs<ExtArgs> = {}>(args?: Subset<T, User$membershipsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TeamMembershipPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     auditLogs<T extends User$auditLogsArgs<ExtArgs> = {}>(args?: Subset<T, User$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     securityEvents<T extends User$securityEventsArgs<ExtArgs> = {}>(args?: Subset<T, User$securityEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SecurityEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    telemetryEvents<T extends User$telemetryEventsArgs<ExtArgs> = {}>(args?: Subset<T, User$telemetryEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TelemetryEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     refreshTokens<T extends User$refreshTokensArgs<ExtArgs> = {}>(args?: Subset<T, User$refreshTokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RefreshTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     usageCounters<T extends User$usageCountersArgs<ExtArgs> = {}>(args?: Subset<T, User$usageCountersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsageCounterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     stripeCustomer<T extends User$stripeCustomerArgs<ExtArgs> = {}>(args?: Subset<T, User$stripeCustomerArgs<ExtArgs>>): Prisma__StripeCustomerClient<$Result.GetResult<Prisma.$StripeCustomerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -3365,6 +3469,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: SecurityEventScalarFieldEnum | SecurityEventScalarFieldEnum[]
+  }
+
+  /**
+   * User.telemetryEvents
+   */
+  export type User$telemetryEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TelemetryEvent
+     */
+    select?: TelemetryEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TelemetryEvent
+     */
+    omit?: TelemetryEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TelemetryEventInclude<ExtArgs> | null
+    where?: TelemetryEventWhereInput
+    orderBy?: TelemetryEventOrderByWithRelationInput | TelemetryEventOrderByWithRelationInput[]
+    cursor?: TelemetryEventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TelemetryEventScalarFieldEnum | TelemetryEventScalarFieldEnum[]
   }
 
   /**
@@ -16400,6 +16528,1150 @@ export namespace Prisma {
 
 
   /**
+   * Model TelemetryEvent
+   */
+
+  export type AggregateTelemetryEvent = {
+    _count: TelemetryEventCountAggregateOutputType | null
+    _avg: TelemetryEventAvgAggregateOutputType | null
+    _sum: TelemetryEventSumAggregateOutputType | null
+    _min: TelemetryEventMinAggregateOutputType | null
+    _max: TelemetryEventMaxAggregateOutputType | null
+  }
+
+  export type TelemetryEventAvgAggregateOutputType = {
+    value: number | null
+  }
+
+  export type TelemetryEventSumAggregateOutputType = {
+    value: number | null
+  }
+
+  export type TelemetryEventMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    type: string | null
+    event: string | null
+    value: number | null
+    version: string | null
+    createdAt: Date | null
+  }
+
+  export type TelemetryEventMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    type: string | null
+    event: string | null
+    value: number | null
+    version: string | null
+    createdAt: Date | null
+  }
+
+  export type TelemetryEventCountAggregateOutputType = {
+    id: number
+    userId: number
+    type: number
+    event: number
+    value: number
+    metadata: number
+    version: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type TelemetryEventAvgAggregateInputType = {
+    value?: true
+  }
+
+  export type TelemetryEventSumAggregateInputType = {
+    value?: true
+  }
+
+  export type TelemetryEventMinAggregateInputType = {
+    id?: true
+    userId?: true
+    type?: true
+    event?: true
+    value?: true
+    version?: true
+    createdAt?: true
+  }
+
+  export type TelemetryEventMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    type?: true
+    event?: true
+    value?: true
+    version?: true
+    createdAt?: true
+  }
+
+  export type TelemetryEventCountAggregateInputType = {
+    id?: true
+    userId?: true
+    type?: true
+    event?: true
+    value?: true
+    metadata?: true
+    version?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type TelemetryEventAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TelemetryEvent to aggregate.
+     */
+    where?: TelemetryEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TelemetryEvents to fetch.
+     */
+    orderBy?: TelemetryEventOrderByWithRelationInput | TelemetryEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TelemetryEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TelemetryEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TelemetryEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TelemetryEvents
+    **/
+    _count?: true | TelemetryEventCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: TelemetryEventAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TelemetryEventSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TelemetryEventMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TelemetryEventMaxAggregateInputType
+  }
+
+  export type GetTelemetryEventAggregateType<T extends TelemetryEventAggregateArgs> = {
+        [P in keyof T & keyof AggregateTelemetryEvent]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTelemetryEvent[P]>
+      : GetScalarType<T[P], AggregateTelemetryEvent[P]>
+  }
+
+
+
+
+  export type TelemetryEventGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TelemetryEventWhereInput
+    orderBy?: TelemetryEventOrderByWithAggregationInput | TelemetryEventOrderByWithAggregationInput[]
+    by: TelemetryEventScalarFieldEnum[] | TelemetryEventScalarFieldEnum
+    having?: TelemetryEventScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TelemetryEventCountAggregateInputType | true
+    _avg?: TelemetryEventAvgAggregateInputType
+    _sum?: TelemetryEventSumAggregateInputType
+    _min?: TelemetryEventMinAggregateInputType
+    _max?: TelemetryEventMaxAggregateInputType
+  }
+
+  export type TelemetryEventGroupByOutputType = {
+    id: string
+    userId: string | null
+    type: string
+    event: string
+    value: number | null
+    metadata: JsonValue | null
+    version: string | null
+    createdAt: Date
+    _count: TelemetryEventCountAggregateOutputType | null
+    _avg: TelemetryEventAvgAggregateOutputType | null
+    _sum: TelemetryEventSumAggregateOutputType | null
+    _min: TelemetryEventMinAggregateOutputType | null
+    _max: TelemetryEventMaxAggregateOutputType | null
+  }
+
+  type GetTelemetryEventGroupByPayload<T extends TelemetryEventGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TelemetryEventGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TelemetryEventGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TelemetryEventGroupByOutputType[P]>
+            : GetScalarType<T[P], TelemetryEventGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TelemetryEventSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    type?: boolean
+    event?: boolean
+    value?: boolean
+    metadata?: boolean
+    version?: boolean
+    createdAt?: boolean
+    user?: boolean | TelemetryEvent$userArgs<ExtArgs>
+  }, ExtArgs["result"]["telemetryEvent"]>
+
+  export type TelemetryEventSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    type?: boolean
+    event?: boolean
+    value?: boolean
+    metadata?: boolean
+    version?: boolean
+    createdAt?: boolean
+    user?: boolean | TelemetryEvent$userArgs<ExtArgs>
+  }, ExtArgs["result"]["telemetryEvent"]>
+
+  export type TelemetryEventSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    type?: boolean
+    event?: boolean
+    value?: boolean
+    metadata?: boolean
+    version?: boolean
+    createdAt?: boolean
+    user?: boolean | TelemetryEvent$userArgs<ExtArgs>
+  }, ExtArgs["result"]["telemetryEvent"]>
+
+  export type TelemetryEventSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    type?: boolean
+    event?: boolean
+    value?: boolean
+    metadata?: boolean
+    version?: boolean
+    createdAt?: boolean
+  }
+
+  export type TelemetryEventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "type" | "event" | "value" | "metadata" | "version" | "createdAt", ExtArgs["result"]["telemetryEvent"]>
+  export type TelemetryEventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | TelemetryEvent$userArgs<ExtArgs>
+  }
+  export type TelemetryEventIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | TelemetryEvent$userArgs<ExtArgs>
+  }
+  export type TelemetryEventIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | TelemetryEvent$userArgs<ExtArgs>
+  }
+
+  export type $TelemetryEventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TelemetryEvent"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string | null
+      type: string
+      event: string
+      value: number | null
+      metadata: Prisma.JsonValue | null
+      version: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["telemetryEvent"]>
+    composites: {}
+  }
+
+  type TelemetryEventGetPayload<S extends boolean | null | undefined | TelemetryEventDefaultArgs> = $Result.GetResult<Prisma.$TelemetryEventPayload, S>
+
+  type TelemetryEventCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TelemetryEventFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TelemetryEventCountAggregateInputType | true
+    }
+
+  export interface TelemetryEventDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TelemetryEvent'], meta: { name: 'TelemetryEvent' } }
+    /**
+     * Find zero or one TelemetryEvent that matches the filter.
+     * @param {TelemetryEventFindUniqueArgs} args - Arguments to find a TelemetryEvent
+     * @example
+     * // Get one TelemetryEvent
+     * const telemetryEvent = await prisma.telemetryEvent.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TelemetryEventFindUniqueArgs>(args: SelectSubset<T, TelemetryEventFindUniqueArgs<ExtArgs>>): Prisma__TelemetryEventClient<$Result.GetResult<Prisma.$TelemetryEventPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TelemetryEvent that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TelemetryEventFindUniqueOrThrowArgs} args - Arguments to find a TelemetryEvent
+     * @example
+     * // Get one TelemetryEvent
+     * const telemetryEvent = await prisma.telemetryEvent.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TelemetryEventFindUniqueOrThrowArgs>(args: SelectSubset<T, TelemetryEventFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TelemetryEventClient<$Result.GetResult<Prisma.$TelemetryEventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TelemetryEvent that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TelemetryEventFindFirstArgs} args - Arguments to find a TelemetryEvent
+     * @example
+     * // Get one TelemetryEvent
+     * const telemetryEvent = await prisma.telemetryEvent.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TelemetryEventFindFirstArgs>(args?: SelectSubset<T, TelemetryEventFindFirstArgs<ExtArgs>>): Prisma__TelemetryEventClient<$Result.GetResult<Prisma.$TelemetryEventPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TelemetryEvent that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TelemetryEventFindFirstOrThrowArgs} args - Arguments to find a TelemetryEvent
+     * @example
+     * // Get one TelemetryEvent
+     * const telemetryEvent = await prisma.telemetryEvent.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TelemetryEventFindFirstOrThrowArgs>(args?: SelectSubset<T, TelemetryEventFindFirstOrThrowArgs<ExtArgs>>): Prisma__TelemetryEventClient<$Result.GetResult<Prisma.$TelemetryEventPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TelemetryEvents that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TelemetryEventFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TelemetryEvents
+     * const telemetryEvents = await prisma.telemetryEvent.findMany()
+     * 
+     * // Get first 10 TelemetryEvents
+     * const telemetryEvents = await prisma.telemetryEvent.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const telemetryEventWithIdOnly = await prisma.telemetryEvent.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TelemetryEventFindManyArgs>(args?: SelectSubset<T, TelemetryEventFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TelemetryEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TelemetryEvent.
+     * @param {TelemetryEventCreateArgs} args - Arguments to create a TelemetryEvent.
+     * @example
+     * // Create one TelemetryEvent
+     * const TelemetryEvent = await prisma.telemetryEvent.create({
+     *   data: {
+     *     // ... data to create a TelemetryEvent
+     *   }
+     * })
+     * 
+     */
+    create<T extends TelemetryEventCreateArgs>(args: SelectSubset<T, TelemetryEventCreateArgs<ExtArgs>>): Prisma__TelemetryEventClient<$Result.GetResult<Prisma.$TelemetryEventPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TelemetryEvents.
+     * @param {TelemetryEventCreateManyArgs} args - Arguments to create many TelemetryEvents.
+     * @example
+     * // Create many TelemetryEvents
+     * const telemetryEvent = await prisma.telemetryEvent.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TelemetryEventCreateManyArgs>(args?: SelectSubset<T, TelemetryEventCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many TelemetryEvents and returns the data saved in the database.
+     * @param {TelemetryEventCreateManyAndReturnArgs} args - Arguments to create many TelemetryEvents.
+     * @example
+     * // Create many TelemetryEvents
+     * const telemetryEvent = await prisma.telemetryEvent.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many TelemetryEvents and only return the `id`
+     * const telemetryEventWithIdOnly = await prisma.telemetryEvent.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TelemetryEventCreateManyAndReturnArgs>(args?: SelectSubset<T, TelemetryEventCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TelemetryEventPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a TelemetryEvent.
+     * @param {TelemetryEventDeleteArgs} args - Arguments to delete one TelemetryEvent.
+     * @example
+     * // Delete one TelemetryEvent
+     * const TelemetryEvent = await prisma.telemetryEvent.delete({
+     *   where: {
+     *     // ... filter to delete one TelemetryEvent
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TelemetryEventDeleteArgs>(args: SelectSubset<T, TelemetryEventDeleteArgs<ExtArgs>>): Prisma__TelemetryEventClient<$Result.GetResult<Prisma.$TelemetryEventPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TelemetryEvent.
+     * @param {TelemetryEventUpdateArgs} args - Arguments to update one TelemetryEvent.
+     * @example
+     * // Update one TelemetryEvent
+     * const telemetryEvent = await prisma.telemetryEvent.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TelemetryEventUpdateArgs>(args: SelectSubset<T, TelemetryEventUpdateArgs<ExtArgs>>): Prisma__TelemetryEventClient<$Result.GetResult<Prisma.$TelemetryEventPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TelemetryEvents.
+     * @param {TelemetryEventDeleteManyArgs} args - Arguments to filter TelemetryEvents to delete.
+     * @example
+     * // Delete a few TelemetryEvents
+     * const { count } = await prisma.telemetryEvent.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TelemetryEventDeleteManyArgs>(args?: SelectSubset<T, TelemetryEventDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TelemetryEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TelemetryEventUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TelemetryEvents
+     * const telemetryEvent = await prisma.telemetryEvent.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TelemetryEventUpdateManyArgs>(args: SelectSubset<T, TelemetryEventUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TelemetryEvents and returns the data updated in the database.
+     * @param {TelemetryEventUpdateManyAndReturnArgs} args - Arguments to update many TelemetryEvents.
+     * @example
+     * // Update many TelemetryEvents
+     * const telemetryEvent = await prisma.telemetryEvent.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more TelemetryEvents and only return the `id`
+     * const telemetryEventWithIdOnly = await prisma.telemetryEvent.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TelemetryEventUpdateManyAndReturnArgs>(args: SelectSubset<T, TelemetryEventUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TelemetryEventPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one TelemetryEvent.
+     * @param {TelemetryEventUpsertArgs} args - Arguments to update or create a TelemetryEvent.
+     * @example
+     * // Update or create a TelemetryEvent
+     * const telemetryEvent = await prisma.telemetryEvent.upsert({
+     *   create: {
+     *     // ... data to create a TelemetryEvent
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TelemetryEvent we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TelemetryEventUpsertArgs>(args: SelectSubset<T, TelemetryEventUpsertArgs<ExtArgs>>): Prisma__TelemetryEventClient<$Result.GetResult<Prisma.$TelemetryEventPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of TelemetryEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TelemetryEventCountArgs} args - Arguments to filter TelemetryEvents to count.
+     * @example
+     * // Count the number of TelemetryEvents
+     * const count = await prisma.telemetryEvent.count({
+     *   where: {
+     *     // ... the filter for the TelemetryEvents we want to count
+     *   }
+     * })
+    **/
+    count<T extends TelemetryEventCountArgs>(
+      args?: Subset<T, TelemetryEventCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TelemetryEventCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TelemetryEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TelemetryEventAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TelemetryEventAggregateArgs>(args: Subset<T, TelemetryEventAggregateArgs>): Prisma.PrismaPromise<GetTelemetryEventAggregateType<T>>
+
+    /**
+     * Group by TelemetryEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TelemetryEventGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TelemetryEventGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TelemetryEventGroupByArgs['orderBy'] }
+        : { orderBy?: TelemetryEventGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TelemetryEventGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTelemetryEventGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TelemetryEvent model
+   */
+  readonly fields: TelemetryEventFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TelemetryEvent.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TelemetryEventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends TelemetryEvent$userArgs<ExtArgs> = {}>(args?: Subset<T, TelemetryEvent$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TelemetryEvent model
+   */
+  interface TelemetryEventFieldRefs {
+    readonly id: FieldRef<"TelemetryEvent", 'String'>
+    readonly userId: FieldRef<"TelemetryEvent", 'String'>
+    readonly type: FieldRef<"TelemetryEvent", 'String'>
+    readonly event: FieldRef<"TelemetryEvent", 'String'>
+    readonly value: FieldRef<"TelemetryEvent", 'Float'>
+    readonly metadata: FieldRef<"TelemetryEvent", 'Json'>
+    readonly version: FieldRef<"TelemetryEvent", 'String'>
+    readonly createdAt: FieldRef<"TelemetryEvent", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TelemetryEvent findUnique
+   */
+  export type TelemetryEventFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TelemetryEvent
+     */
+    select?: TelemetryEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TelemetryEvent
+     */
+    omit?: TelemetryEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TelemetryEventInclude<ExtArgs> | null
+    /**
+     * Filter, which TelemetryEvent to fetch.
+     */
+    where: TelemetryEventWhereUniqueInput
+  }
+
+  /**
+   * TelemetryEvent findUniqueOrThrow
+   */
+  export type TelemetryEventFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TelemetryEvent
+     */
+    select?: TelemetryEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TelemetryEvent
+     */
+    omit?: TelemetryEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TelemetryEventInclude<ExtArgs> | null
+    /**
+     * Filter, which TelemetryEvent to fetch.
+     */
+    where: TelemetryEventWhereUniqueInput
+  }
+
+  /**
+   * TelemetryEvent findFirst
+   */
+  export type TelemetryEventFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TelemetryEvent
+     */
+    select?: TelemetryEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TelemetryEvent
+     */
+    omit?: TelemetryEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TelemetryEventInclude<ExtArgs> | null
+    /**
+     * Filter, which TelemetryEvent to fetch.
+     */
+    where?: TelemetryEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TelemetryEvents to fetch.
+     */
+    orderBy?: TelemetryEventOrderByWithRelationInput | TelemetryEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TelemetryEvents.
+     */
+    cursor?: TelemetryEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TelemetryEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TelemetryEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TelemetryEvents.
+     */
+    distinct?: TelemetryEventScalarFieldEnum | TelemetryEventScalarFieldEnum[]
+  }
+
+  /**
+   * TelemetryEvent findFirstOrThrow
+   */
+  export type TelemetryEventFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TelemetryEvent
+     */
+    select?: TelemetryEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TelemetryEvent
+     */
+    omit?: TelemetryEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TelemetryEventInclude<ExtArgs> | null
+    /**
+     * Filter, which TelemetryEvent to fetch.
+     */
+    where?: TelemetryEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TelemetryEvents to fetch.
+     */
+    orderBy?: TelemetryEventOrderByWithRelationInput | TelemetryEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TelemetryEvents.
+     */
+    cursor?: TelemetryEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TelemetryEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TelemetryEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TelemetryEvents.
+     */
+    distinct?: TelemetryEventScalarFieldEnum | TelemetryEventScalarFieldEnum[]
+  }
+
+  /**
+   * TelemetryEvent findMany
+   */
+  export type TelemetryEventFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TelemetryEvent
+     */
+    select?: TelemetryEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TelemetryEvent
+     */
+    omit?: TelemetryEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TelemetryEventInclude<ExtArgs> | null
+    /**
+     * Filter, which TelemetryEvents to fetch.
+     */
+    where?: TelemetryEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TelemetryEvents to fetch.
+     */
+    orderBy?: TelemetryEventOrderByWithRelationInput | TelemetryEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TelemetryEvents.
+     */
+    cursor?: TelemetryEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TelemetryEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TelemetryEvents.
+     */
+    skip?: number
+    distinct?: TelemetryEventScalarFieldEnum | TelemetryEventScalarFieldEnum[]
+  }
+
+  /**
+   * TelemetryEvent create
+   */
+  export type TelemetryEventCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TelemetryEvent
+     */
+    select?: TelemetryEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TelemetryEvent
+     */
+    omit?: TelemetryEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TelemetryEventInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TelemetryEvent.
+     */
+    data: XOR<TelemetryEventCreateInput, TelemetryEventUncheckedCreateInput>
+  }
+
+  /**
+   * TelemetryEvent createMany
+   */
+  export type TelemetryEventCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TelemetryEvents.
+     */
+    data: TelemetryEventCreateManyInput | TelemetryEventCreateManyInput[]
+  }
+
+  /**
+   * TelemetryEvent createManyAndReturn
+   */
+  export type TelemetryEventCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TelemetryEvent
+     */
+    select?: TelemetryEventSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TelemetryEvent
+     */
+    omit?: TelemetryEventOmit<ExtArgs> | null
+    /**
+     * The data used to create many TelemetryEvents.
+     */
+    data: TelemetryEventCreateManyInput | TelemetryEventCreateManyInput[]
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TelemetryEventIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TelemetryEvent update
+   */
+  export type TelemetryEventUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TelemetryEvent
+     */
+    select?: TelemetryEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TelemetryEvent
+     */
+    omit?: TelemetryEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TelemetryEventInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TelemetryEvent.
+     */
+    data: XOR<TelemetryEventUpdateInput, TelemetryEventUncheckedUpdateInput>
+    /**
+     * Choose, which TelemetryEvent to update.
+     */
+    where: TelemetryEventWhereUniqueInput
+  }
+
+  /**
+   * TelemetryEvent updateMany
+   */
+  export type TelemetryEventUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TelemetryEvents.
+     */
+    data: XOR<TelemetryEventUpdateManyMutationInput, TelemetryEventUncheckedUpdateManyInput>
+    /**
+     * Filter which TelemetryEvents to update
+     */
+    where?: TelemetryEventWhereInput
+    /**
+     * Limit how many TelemetryEvents to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TelemetryEvent updateManyAndReturn
+   */
+  export type TelemetryEventUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TelemetryEvent
+     */
+    select?: TelemetryEventSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TelemetryEvent
+     */
+    omit?: TelemetryEventOmit<ExtArgs> | null
+    /**
+     * The data used to update TelemetryEvents.
+     */
+    data: XOR<TelemetryEventUpdateManyMutationInput, TelemetryEventUncheckedUpdateManyInput>
+    /**
+     * Filter which TelemetryEvents to update
+     */
+    where?: TelemetryEventWhereInput
+    /**
+     * Limit how many TelemetryEvents to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TelemetryEventIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TelemetryEvent upsert
+   */
+  export type TelemetryEventUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TelemetryEvent
+     */
+    select?: TelemetryEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TelemetryEvent
+     */
+    omit?: TelemetryEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TelemetryEventInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TelemetryEvent to update in case it exists.
+     */
+    where: TelemetryEventWhereUniqueInput
+    /**
+     * In case the TelemetryEvent found by the `where` argument doesn't exist, create a new TelemetryEvent with this data.
+     */
+    create: XOR<TelemetryEventCreateInput, TelemetryEventUncheckedCreateInput>
+    /**
+     * In case the TelemetryEvent was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TelemetryEventUpdateInput, TelemetryEventUncheckedUpdateInput>
+  }
+
+  /**
+   * TelemetryEvent delete
+   */
+  export type TelemetryEventDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TelemetryEvent
+     */
+    select?: TelemetryEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TelemetryEvent
+     */
+    omit?: TelemetryEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TelemetryEventInclude<ExtArgs> | null
+    /**
+     * Filter which TelemetryEvent to delete.
+     */
+    where: TelemetryEventWhereUniqueInput
+  }
+
+  /**
+   * TelemetryEvent deleteMany
+   */
+  export type TelemetryEventDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TelemetryEvents to delete
+     */
+    where?: TelemetryEventWhereInput
+    /**
+     * Limit how many TelemetryEvents to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TelemetryEvent.user
+   */
+  export type TelemetryEvent$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * TelemetryEvent without action
+   */
+  export type TelemetryEventDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TelemetryEvent
+     */
+    select?: TelemetryEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TelemetryEvent
+     */
+    omit?: TelemetryEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TelemetryEventInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model VerificationToken
    */
 
@@ -17564,6 +18836,20 @@ export namespace Prisma {
   export type WebhookEventScalarFieldEnum = (typeof WebhookEventScalarFieldEnum)[keyof typeof WebhookEventScalarFieldEnum]
 
 
+  export const TelemetryEventScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    type: 'type',
+    event: 'event',
+    value: 'value',
+    metadata: 'metadata',
+    version: 'version',
+    createdAt: 'createdAt'
+  };
+
+  export type TelemetryEventScalarFieldEnum = (typeof TelemetryEventScalarFieldEnum)[keyof typeof TelemetryEventScalarFieldEnum]
+
+
   export const VerificationTokenScalarFieldEnum: {
     id: 'id',
     email: 'email',
@@ -17682,6 +18968,7 @@ export namespace Prisma {
     memberships?: TeamMembershipListRelationFilter
     auditLogs?: AuditLogListRelationFilter
     securityEvents?: SecurityEventListRelationFilter
+    telemetryEvents?: TelemetryEventListRelationFilter
     refreshTokens?: RefreshTokenListRelationFilter
     usageCounters?: UsageCounterListRelationFilter
     stripeCustomer?: XOR<StripeCustomerNullableScalarRelationFilter, StripeCustomerWhereInput> | null
@@ -17701,6 +18988,7 @@ export namespace Prisma {
     memberships?: TeamMembershipOrderByRelationAggregateInput
     auditLogs?: AuditLogOrderByRelationAggregateInput
     securityEvents?: SecurityEventOrderByRelationAggregateInput
+    telemetryEvents?: TelemetryEventOrderByRelationAggregateInput
     refreshTokens?: RefreshTokenOrderByRelationAggregateInput
     usageCounters?: UsageCounterOrderByRelationAggregateInput
     stripeCustomer?: StripeCustomerOrderByWithRelationInput
@@ -17723,6 +19011,7 @@ export namespace Prisma {
     memberships?: TeamMembershipListRelationFilter
     auditLogs?: AuditLogListRelationFilter
     securityEvents?: SecurityEventListRelationFilter
+    telemetryEvents?: TelemetryEventListRelationFilter
     refreshTokens?: RefreshTokenListRelationFilter
     usageCounters?: UsageCounterListRelationFilter
     stripeCustomer?: XOR<StripeCustomerNullableScalarRelationFilter, StripeCustomerWhereInput> | null
@@ -18506,6 +19795,78 @@ export namespace Prisma {
     processedAt?: DateTimeWithAggregatesFilter<"WebhookEvent"> | Date | string
   }
 
+  export type TelemetryEventWhereInput = {
+    AND?: TelemetryEventWhereInput | TelemetryEventWhereInput[]
+    OR?: TelemetryEventWhereInput[]
+    NOT?: TelemetryEventWhereInput | TelemetryEventWhereInput[]
+    id?: StringFilter<"TelemetryEvent"> | string
+    userId?: StringNullableFilter<"TelemetryEvent"> | string | null
+    type?: StringFilter<"TelemetryEvent"> | string
+    event?: StringFilter<"TelemetryEvent"> | string
+    value?: FloatNullableFilter<"TelemetryEvent"> | number | null
+    metadata?: JsonNullableFilter<"TelemetryEvent">
+    version?: StringNullableFilter<"TelemetryEvent"> | string | null
+    createdAt?: DateTimeFilter<"TelemetryEvent"> | Date | string
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }
+
+  export type TelemetryEventOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrderInput | SortOrder
+    type?: SortOrder
+    event?: SortOrder
+    value?: SortOrderInput | SortOrder
+    metadata?: SortOrderInput | SortOrder
+    version?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type TelemetryEventWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: TelemetryEventWhereInput | TelemetryEventWhereInput[]
+    OR?: TelemetryEventWhereInput[]
+    NOT?: TelemetryEventWhereInput | TelemetryEventWhereInput[]
+    userId?: StringNullableFilter<"TelemetryEvent"> | string | null
+    type?: StringFilter<"TelemetryEvent"> | string
+    event?: StringFilter<"TelemetryEvent"> | string
+    value?: FloatNullableFilter<"TelemetryEvent"> | number | null
+    metadata?: JsonNullableFilter<"TelemetryEvent">
+    version?: StringNullableFilter<"TelemetryEvent"> | string | null
+    createdAt?: DateTimeFilter<"TelemetryEvent"> | Date | string
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }, "id">
+
+  export type TelemetryEventOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrderInput | SortOrder
+    type?: SortOrder
+    event?: SortOrder
+    value?: SortOrderInput | SortOrder
+    metadata?: SortOrderInput | SortOrder
+    version?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: TelemetryEventCountOrderByAggregateInput
+    _avg?: TelemetryEventAvgOrderByAggregateInput
+    _max?: TelemetryEventMaxOrderByAggregateInput
+    _min?: TelemetryEventMinOrderByAggregateInput
+    _sum?: TelemetryEventSumOrderByAggregateInput
+  }
+
+  export type TelemetryEventScalarWhereWithAggregatesInput = {
+    AND?: TelemetryEventScalarWhereWithAggregatesInput | TelemetryEventScalarWhereWithAggregatesInput[]
+    OR?: TelemetryEventScalarWhereWithAggregatesInput[]
+    NOT?: TelemetryEventScalarWhereWithAggregatesInput | TelemetryEventScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"TelemetryEvent"> | string
+    userId?: StringNullableWithAggregatesFilter<"TelemetryEvent"> | string | null
+    type?: StringWithAggregatesFilter<"TelemetryEvent"> | string
+    event?: StringWithAggregatesFilter<"TelemetryEvent"> | string
+    value?: FloatNullableWithAggregatesFilter<"TelemetryEvent"> | number | null
+    metadata?: JsonNullableWithAggregatesFilter<"TelemetryEvent">
+    version?: StringNullableWithAggregatesFilter<"TelemetryEvent"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"TelemetryEvent"> | Date | string
+  }
+
   export type VerificationTokenWhereInput = {
     AND?: VerificationTokenWhereInput | VerificationTokenWhereInput[]
     OR?: VerificationTokenWhereInput[]
@@ -18572,6 +19933,7 @@ export namespace Prisma {
     memberships?: TeamMembershipCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
     securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
+    telemetryEvents?: TelemetryEventCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
     usageCounters?: UsageCounterCreateNestedManyWithoutUserInput
     stripeCustomer?: StripeCustomerCreateNestedOneWithoutUserInput
@@ -18591,6 +19953,7 @@ export namespace Prisma {
     memberships?: TeamMembershipUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
     securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
+    telemetryEvents?: TelemetryEventUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     usageCounters?: UsageCounterUncheckedCreateNestedManyWithoutUserInput
     stripeCustomer?: StripeCustomerUncheckedCreateNestedOneWithoutUserInput
@@ -18610,6 +19973,7 @@ export namespace Prisma {
     memberships?: TeamMembershipUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
     securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
+    telemetryEvents?: TelemetryEventUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
     usageCounters?: UsageCounterUpdateManyWithoutUserNestedInput
     stripeCustomer?: StripeCustomerUpdateOneWithoutUserNestedInput
@@ -18629,6 +19993,7 @@ export namespace Prisma {
     memberships?: TeamMembershipUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
     securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
+    telemetryEvents?: TelemetryEventUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     usageCounters?: UsageCounterUncheckedUpdateManyWithoutUserNestedInput
     stripeCustomer?: StripeCustomerUncheckedUpdateOneWithoutUserNestedInput
@@ -19446,6 +20811,82 @@ export namespace Prisma {
     processedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type TelemetryEventCreateInput = {
+    id?: string
+    type: string
+    event: string
+    value?: number | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    version?: string | null
+    createdAt?: Date | string
+    user?: UserCreateNestedOneWithoutTelemetryEventsInput
+  }
+
+  export type TelemetryEventUncheckedCreateInput = {
+    id?: string
+    userId?: string | null
+    type: string
+    event: string
+    value?: number | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    version?: string | null
+    createdAt?: Date | string
+  }
+
+  export type TelemetryEventUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    event?: StringFieldUpdateOperationsInput | string
+    value?: NullableFloatFieldUpdateOperationsInput | number | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    version?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutTelemetryEventsNestedInput
+  }
+
+  export type TelemetryEventUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    event?: StringFieldUpdateOperationsInput | string
+    value?: NullableFloatFieldUpdateOperationsInput | number | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    version?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TelemetryEventCreateManyInput = {
+    id?: string
+    userId?: string | null
+    type: string
+    event: string
+    value?: number | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    version?: string | null
+    createdAt?: Date | string
+  }
+
+  export type TelemetryEventUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    event?: StringFieldUpdateOperationsInput | string
+    value?: NullableFloatFieldUpdateOperationsInput | number | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    version?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TelemetryEventUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    event?: StringFieldUpdateOperationsInput | string
+    value?: NullableFloatFieldUpdateOperationsInput | number | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    version?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type VerificationTokenCreateInput = {
     id?: string
     email: string
@@ -19589,6 +21030,12 @@ export namespace Prisma {
     none?: SecurityEventWhereInput
   }
 
+  export type TelemetryEventListRelationFilter = {
+    every?: TelemetryEventWhereInput
+    some?: TelemetryEventWhereInput
+    none?: TelemetryEventWhereInput
+  }
+
   export type RefreshTokenListRelationFilter = {
     every?: RefreshTokenWhereInput
     some?: RefreshTokenWhereInput
@@ -19633,6 +21080,10 @@ export namespace Prisma {
   }
 
   export type SecurityEventOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TelemetryEventOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -20203,6 +21654,72 @@ export namespace Prisma {
     processedAt?: SortOrder
   }
 
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type TelemetryEventCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    type?: SortOrder
+    event?: SortOrder
+    value?: SortOrder
+    metadata?: SortOrder
+    version?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type TelemetryEventAvgOrderByAggregateInput = {
+    value?: SortOrder
+  }
+
+  export type TelemetryEventMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    type?: SortOrder
+    event?: SortOrder
+    value?: SortOrder
+    version?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type TelemetryEventMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    type?: SortOrder
+    event?: SortOrder
+    value?: SortOrder
+    version?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type TelemetryEventSumOrderByAggregateInput = {
+    value?: SortOrder
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
   export type VerificationTokenEmailTokenCompoundUniqueInput = {
     email: string
     token: string
@@ -20267,6 +21784,13 @@ export namespace Prisma {
     connect?: SecurityEventWhereUniqueInput | SecurityEventWhereUniqueInput[]
   }
 
+  export type TelemetryEventCreateNestedManyWithoutUserInput = {
+    create?: XOR<TelemetryEventCreateWithoutUserInput, TelemetryEventUncheckedCreateWithoutUserInput> | TelemetryEventCreateWithoutUserInput[] | TelemetryEventUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: TelemetryEventCreateOrConnectWithoutUserInput | TelemetryEventCreateOrConnectWithoutUserInput[]
+    createMany?: TelemetryEventCreateManyUserInputEnvelope
+    connect?: TelemetryEventWhereUniqueInput | TelemetryEventWhereUniqueInput[]
+  }
+
   export type RefreshTokenCreateNestedManyWithoutUserInput = {
     create?: XOR<RefreshTokenCreateWithoutUserInput, RefreshTokenUncheckedCreateWithoutUserInput> | RefreshTokenCreateWithoutUserInput[] | RefreshTokenUncheckedCreateWithoutUserInput[]
     connectOrCreate?: RefreshTokenCreateOrConnectWithoutUserInput | RefreshTokenCreateOrConnectWithoutUserInput[]
@@ -20326,6 +21850,13 @@ export namespace Prisma {
     connectOrCreate?: SecurityEventCreateOrConnectWithoutUserInput | SecurityEventCreateOrConnectWithoutUserInput[]
     createMany?: SecurityEventCreateManyUserInputEnvelope
     connect?: SecurityEventWhereUniqueInput | SecurityEventWhereUniqueInput[]
+  }
+
+  export type TelemetryEventUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<TelemetryEventCreateWithoutUserInput, TelemetryEventUncheckedCreateWithoutUserInput> | TelemetryEventCreateWithoutUserInput[] | TelemetryEventUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: TelemetryEventCreateOrConnectWithoutUserInput | TelemetryEventCreateOrConnectWithoutUserInput[]
+    createMany?: TelemetryEventCreateManyUserInputEnvelope
+    connect?: TelemetryEventWhereUniqueInput | TelemetryEventWhereUniqueInput[]
   }
 
   export type RefreshTokenUncheckedCreateNestedManyWithoutUserInput = {
@@ -20434,6 +21965,20 @@ export namespace Prisma {
     update?: SecurityEventUpdateWithWhereUniqueWithoutUserInput | SecurityEventUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: SecurityEventUpdateManyWithWhereWithoutUserInput | SecurityEventUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: SecurityEventScalarWhereInput | SecurityEventScalarWhereInput[]
+  }
+
+  export type TelemetryEventUpdateManyWithoutUserNestedInput = {
+    create?: XOR<TelemetryEventCreateWithoutUserInput, TelemetryEventUncheckedCreateWithoutUserInput> | TelemetryEventCreateWithoutUserInput[] | TelemetryEventUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: TelemetryEventCreateOrConnectWithoutUserInput | TelemetryEventCreateOrConnectWithoutUserInput[]
+    upsert?: TelemetryEventUpsertWithWhereUniqueWithoutUserInput | TelemetryEventUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: TelemetryEventCreateManyUserInputEnvelope
+    set?: TelemetryEventWhereUniqueInput | TelemetryEventWhereUniqueInput[]
+    disconnect?: TelemetryEventWhereUniqueInput | TelemetryEventWhereUniqueInput[]
+    delete?: TelemetryEventWhereUniqueInput | TelemetryEventWhereUniqueInput[]
+    connect?: TelemetryEventWhereUniqueInput | TelemetryEventWhereUniqueInput[]
+    update?: TelemetryEventUpdateWithWhereUniqueWithoutUserInput | TelemetryEventUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: TelemetryEventUpdateManyWithWhereWithoutUserInput | TelemetryEventUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: TelemetryEventScalarWhereInput | TelemetryEventScalarWhereInput[]
   }
 
   export type RefreshTokenUpdateManyWithoutUserNestedInput = {
@@ -20552,6 +22097,20 @@ export namespace Prisma {
     update?: SecurityEventUpdateWithWhereUniqueWithoutUserInput | SecurityEventUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: SecurityEventUpdateManyWithWhereWithoutUserInput | SecurityEventUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: SecurityEventScalarWhereInput | SecurityEventScalarWhereInput[]
+  }
+
+  export type TelemetryEventUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<TelemetryEventCreateWithoutUserInput, TelemetryEventUncheckedCreateWithoutUserInput> | TelemetryEventCreateWithoutUserInput[] | TelemetryEventUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: TelemetryEventCreateOrConnectWithoutUserInput | TelemetryEventCreateOrConnectWithoutUserInput[]
+    upsert?: TelemetryEventUpsertWithWhereUniqueWithoutUserInput | TelemetryEventUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: TelemetryEventCreateManyUserInputEnvelope
+    set?: TelemetryEventWhereUniqueInput | TelemetryEventWhereUniqueInput[]
+    disconnect?: TelemetryEventWhereUniqueInput | TelemetryEventWhereUniqueInput[]
+    delete?: TelemetryEventWhereUniqueInput | TelemetryEventWhereUniqueInput[]
+    connect?: TelemetryEventWhereUniqueInput | TelemetryEventWhereUniqueInput[]
+    update?: TelemetryEventUpdateWithWhereUniqueWithoutUserInput | TelemetryEventUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: TelemetryEventUpdateManyWithWhereWithoutUserInput | TelemetryEventUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: TelemetryEventScalarWhereInput | TelemetryEventScalarWhereInput[]
   }
 
   export type RefreshTokenUncheckedUpdateManyWithoutUserNestedInput = {
@@ -20862,6 +22421,30 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSubscriptionInput, UserUpdateWithoutSubscriptionInput>, UserUncheckedUpdateWithoutSubscriptionInput>
   }
 
+  export type UserCreateNestedOneWithoutTelemetryEventsInput = {
+    create?: XOR<UserCreateWithoutTelemetryEventsInput, UserUncheckedCreateWithoutTelemetryEventsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutTelemetryEventsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type UserUpdateOneWithoutTelemetryEventsNestedInput = {
+    create?: XOR<UserCreateWithoutTelemetryEventsInput, UserUncheckedCreateWithoutTelemetryEventsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutTelemetryEventsInput
+    upsert?: UserUpsertWithoutTelemetryEventsInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutTelemetryEventsInput, UserUpdateWithoutTelemetryEventsInput>, UserUncheckedUpdateWithoutTelemetryEventsInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -21068,6 +22651,22 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
   export type ChatCreateWithoutUserInput = {
     id?: string
     prompt: string
@@ -21197,6 +22796,35 @@ export namespace Prisma {
 
   export type SecurityEventCreateManyUserInputEnvelope = {
     data: SecurityEventCreateManyUserInput | SecurityEventCreateManyUserInput[]
+  }
+
+  export type TelemetryEventCreateWithoutUserInput = {
+    id?: string
+    type: string
+    event: string
+    value?: number | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    version?: string | null
+    createdAt?: Date | string
+  }
+
+  export type TelemetryEventUncheckedCreateWithoutUserInput = {
+    id?: string
+    type: string
+    event: string
+    value?: number | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    version?: string | null
+    createdAt?: Date | string
+  }
+
+  export type TelemetryEventCreateOrConnectWithoutUserInput = {
+    where: TelemetryEventWhereUniqueInput
+    create: XOR<TelemetryEventCreateWithoutUserInput, TelemetryEventUncheckedCreateWithoutUserInput>
+  }
+
+  export type TelemetryEventCreateManyUserInputEnvelope = {
+    data: TelemetryEventCreateManyUserInput | TelemetryEventCreateManyUserInput[]
   }
 
   export type RefreshTokenCreateWithoutUserInput = {
@@ -21438,6 +23066,36 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"SecurityEvent"> | Date | string
   }
 
+  export type TelemetryEventUpsertWithWhereUniqueWithoutUserInput = {
+    where: TelemetryEventWhereUniqueInput
+    update: XOR<TelemetryEventUpdateWithoutUserInput, TelemetryEventUncheckedUpdateWithoutUserInput>
+    create: XOR<TelemetryEventCreateWithoutUserInput, TelemetryEventUncheckedCreateWithoutUserInput>
+  }
+
+  export type TelemetryEventUpdateWithWhereUniqueWithoutUserInput = {
+    where: TelemetryEventWhereUniqueInput
+    data: XOR<TelemetryEventUpdateWithoutUserInput, TelemetryEventUncheckedUpdateWithoutUserInput>
+  }
+
+  export type TelemetryEventUpdateManyWithWhereWithoutUserInput = {
+    where: TelemetryEventScalarWhereInput
+    data: XOR<TelemetryEventUpdateManyMutationInput, TelemetryEventUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type TelemetryEventScalarWhereInput = {
+    AND?: TelemetryEventScalarWhereInput | TelemetryEventScalarWhereInput[]
+    OR?: TelemetryEventScalarWhereInput[]
+    NOT?: TelemetryEventScalarWhereInput | TelemetryEventScalarWhereInput[]
+    id?: StringFilter<"TelemetryEvent"> | string
+    userId?: StringNullableFilter<"TelemetryEvent"> | string | null
+    type?: StringFilter<"TelemetryEvent"> | string
+    event?: StringFilter<"TelemetryEvent"> | string
+    value?: FloatNullableFilter<"TelemetryEvent"> | number | null
+    metadata?: JsonNullableFilter<"TelemetryEvent">
+    version?: StringNullableFilter<"TelemetryEvent"> | string | null
+    createdAt?: DateTimeFilter<"TelemetryEvent"> | Date | string
+  }
+
   export type RefreshTokenUpsertWithWhereUniqueWithoutUserInput = {
     where: RefreshTokenWhereUniqueInput
     update: XOR<RefreshTokenUpdateWithoutUserInput, RefreshTokenUncheckedUpdateWithoutUserInput>
@@ -21644,6 +23302,7 @@ export namespace Prisma {
     edits?: EditCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
     securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
+    telemetryEvents?: TelemetryEventCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
     usageCounters?: UsageCounterCreateNestedManyWithoutUserInput
     stripeCustomer?: StripeCustomerCreateNestedOneWithoutUserInput
@@ -21662,6 +23321,7 @@ export namespace Prisma {
     edits?: EditUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
     securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
+    telemetryEvents?: TelemetryEventUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     usageCounters?: UsageCounterUncheckedCreateNestedManyWithoutUserInput
     stripeCustomer?: StripeCustomerUncheckedCreateNestedOneWithoutUserInput
@@ -21721,6 +23381,7 @@ export namespace Prisma {
     edits?: EditUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
     securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
+    telemetryEvents?: TelemetryEventUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
     usageCounters?: UsageCounterUpdateManyWithoutUserNestedInput
     stripeCustomer?: StripeCustomerUpdateOneWithoutUserNestedInput
@@ -21739,6 +23400,7 @@ export namespace Prisma {
     edits?: EditUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
     securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
+    telemetryEvents?: TelemetryEventUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     usageCounters?: UsageCounterUncheckedUpdateManyWithoutUserNestedInput
     stripeCustomer?: StripeCustomerUncheckedUpdateOneWithoutUserNestedInput
@@ -21788,6 +23450,7 @@ export namespace Prisma {
     memberships?: TeamMembershipCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
     securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
+    telemetryEvents?: TelemetryEventCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
     usageCounters?: UsageCounterCreateNestedManyWithoutUserInput
     stripeCustomer?: StripeCustomerCreateNestedOneWithoutUserInput
@@ -21806,6 +23469,7 @@ export namespace Prisma {
     memberships?: TeamMembershipUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
     securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
+    telemetryEvents?: TelemetryEventUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     usageCounters?: UsageCounterUncheckedCreateNestedManyWithoutUserInput
     stripeCustomer?: StripeCustomerUncheckedCreateNestedOneWithoutUserInput
@@ -21840,6 +23504,7 @@ export namespace Prisma {
     memberships?: TeamMembershipUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
     securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
+    telemetryEvents?: TelemetryEventUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
     usageCounters?: UsageCounterUpdateManyWithoutUserNestedInput
     stripeCustomer?: StripeCustomerUpdateOneWithoutUserNestedInput
@@ -21858,6 +23523,7 @@ export namespace Prisma {
     memberships?: TeamMembershipUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
     securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
+    telemetryEvents?: TelemetryEventUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     usageCounters?: UsageCounterUncheckedUpdateManyWithoutUserNestedInput
     stripeCustomer?: StripeCustomerUncheckedUpdateOneWithoutUserNestedInput
@@ -21876,6 +23542,7 @@ export namespace Prisma {
     memberships?: TeamMembershipCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
     securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
+    telemetryEvents?: TelemetryEventCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
     usageCounters?: UsageCounterCreateNestedManyWithoutUserInput
     stripeCustomer?: StripeCustomerCreateNestedOneWithoutUserInput
@@ -21894,6 +23561,7 @@ export namespace Prisma {
     memberships?: TeamMembershipUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
     securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
+    telemetryEvents?: TelemetryEventUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     usageCounters?: UsageCounterUncheckedCreateNestedManyWithoutUserInput
     stripeCustomer?: StripeCustomerUncheckedCreateNestedOneWithoutUserInput
@@ -21928,6 +23596,7 @@ export namespace Prisma {
     memberships?: TeamMembershipUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
     securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
+    telemetryEvents?: TelemetryEventUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
     usageCounters?: UsageCounterUpdateManyWithoutUserNestedInput
     stripeCustomer?: StripeCustomerUpdateOneWithoutUserNestedInput
@@ -21946,6 +23615,7 @@ export namespace Prisma {
     memberships?: TeamMembershipUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
     securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
+    telemetryEvents?: TelemetryEventUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     usageCounters?: UsageCounterUncheckedUpdateManyWithoutUserNestedInput
     stripeCustomer?: StripeCustomerUncheckedUpdateOneWithoutUserNestedInput
@@ -21989,6 +23659,7 @@ export namespace Prisma {
     edits?: EditCreateNestedManyWithoutUserInput
     memberships?: TeamMembershipCreateNestedManyWithoutUserInput
     securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
+    telemetryEvents?: TelemetryEventCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
     usageCounters?: UsageCounterCreateNestedManyWithoutUserInput
     stripeCustomer?: StripeCustomerCreateNestedOneWithoutUserInput
@@ -22007,6 +23678,7 @@ export namespace Prisma {
     edits?: EditUncheckedCreateNestedManyWithoutUserInput
     memberships?: TeamMembershipUncheckedCreateNestedManyWithoutUserInput
     securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
+    telemetryEvents?: TelemetryEventUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     usageCounters?: UsageCounterUncheckedCreateNestedManyWithoutUserInput
     stripeCustomer?: StripeCustomerUncheckedCreateNestedOneWithoutUserInput
@@ -22072,6 +23744,7 @@ export namespace Prisma {
     edits?: EditUpdateManyWithoutUserNestedInput
     memberships?: TeamMembershipUpdateManyWithoutUserNestedInput
     securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
+    telemetryEvents?: TelemetryEventUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
     usageCounters?: UsageCounterUpdateManyWithoutUserNestedInput
     stripeCustomer?: StripeCustomerUpdateOneWithoutUserNestedInput
@@ -22090,6 +23763,7 @@ export namespace Prisma {
     edits?: EditUncheckedUpdateManyWithoutUserNestedInput
     memberships?: TeamMembershipUncheckedUpdateManyWithoutUserNestedInput
     securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
+    telemetryEvents?: TelemetryEventUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     usageCounters?: UsageCounterUncheckedUpdateManyWithoutUserNestedInput
     stripeCustomer?: StripeCustomerUncheckedUpdateOneWithoutUserNestedInput
@@ -22108,6 +23782,7 @@ export namespace Prisma {
     edits?: EditCreateNestedManyWithoutUserInput
     memberships?: TeamMembershipCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    telemetryEvents?: TelemetryEventCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
     usageCounters?: UsageCounterCreateNestedManyWithoutUserInput
     stripeCustomer?: StripeCustomerCreateNestedOneWithoutUserInput
@@ -22126,6 +23801,7 @@ export namespace Prisma {
     edits?: EditUncheckedCreateNestedManyWithoutUserInput
     memberships?: TeamMembershipUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    telemetryEvents?: TelemetryEventUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     usageCounters?: UsageCounterUncheckedCreateNestedManyWithoutUserInput
     stripeCustomer?: StripeCustomerUncheckedCreateNestedOneWithoutUserInput
@@ -22160,6 +23836,7 @@ export namespace Prisma {
     edits?: EditUpdateManyWithoutUserNestedInput
     memberships?: TeamMembershipUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    telemetryEvents?: TelemetryEventUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
     usageCounters?: UsageCounterUpdateManyWithoutUserNestedInput
     stripeCustomer?: StripeCustomerUpdateOneWithoutUserNestedInput
@@ -22178,6 +23855,7 @@ export namespace Prisma {
     edits?: EditUncheckedUpdateManyWithoutUserNestedInput
     memberships?: TeamMembershipUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    telemetryEvents?: TelemetryEventUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     usageCounters?: UsageCounterUncheckedUpdateManyWithoutUserNestedInput
     stripeCustomer?: StripeCustomerUncheckedUpdateOneWithoutUserNestedInput
@@ -22197,6 +23875,7 @@ export namespace Prisma {
     memberships?: TeamMembershipCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
     securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
+    telemetryEvents?: TelemetryEventCreateNestedManyWithoutUserInput
     usageCounters?: UsageCounterCreateNestedManyWithoutUserInput
     stripeCustomer?: StripeCustomerCreateNestedOneWithoutUserInput
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
@@ -22215,6 +23894,7 @@ export namespace Prisma {
     memberships?: TeamMembershipUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
     securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
+    telemetryEvents?: TelemetryEventUncheckedCreateNestedManyWithoutUserInput
     usageCounters?: UsageCounterUncheckedCreateNestedManyWithoutUserInput
     stripeCustomer?: StripeCustomerUncheckedCreateNestedOneWithoutUserInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
@@ -22249,6 +23929,7 @@ export namespace Prisma {
     memberships?: TeamMembershipUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
     securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
+    telemetryEvents?: TelemetryEventUpdateManyWithoutUserNestedInput
     usageCounters?: UsageCounterUpdateManyWithoutUserNestedInput
     stripeCustomer?: StripeCustomerUpdateOneWithoutUserNestedInput
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
@@ -22267,6 +23948,7 @@ export namespace Prisma {
     memberships?: TeamMembershipUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
     securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
+    telemetryEvents?: TelemetryEventUncheckedUpdateManyWithoutUserNestedInput
     usageCounters?: UsageCounterUncheckedUpdateManyWithoutUserNestedInput
     stripeCustomer?: StripeCustomerUncheckedUpdateOneWithoutUserNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
@@ -22285,6 +23967,7 @@ export namespace Prisma {
     memberships?: TeamMembershipCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
     securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
+    telemetryEvents?: TelemetryEventCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
     stripeCustomer?: StripeCustomerCreateNestedOneWithoutUserInput
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
@@ -22303,6 +23986,7 @@ export namespace Prisma {
     memberships?: TeamMembershipUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
     securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
+    telemetryEvents?: TelemetryEventUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     stripeCustomer?: StripeCustomerUncheckedCreateNestedOneWithoutUserInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
@@ -22337,6 +24021,7 @@ export namespace Prisma {
     memberships?: TeamMembershipUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
     securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
+    telemetryEvents?: TelemetryEventUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
     stripeCustomer?: StripeCustomerUpdateOneWithoutUserNestedInput
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
@@ -22355,6 +24040,7 @@ export namespace Prisma {
     memberships?: TeamMembershipUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
     securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
+    telemetryEvents?: TelemetryEventUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     stripeCustomer?: StripeCustomerUncheckedUpdateOneWithoutUserNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
@@ -22373,6 +24059,7 @@ export namespace Prisma {
     memberships?: TeamMembershipCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
     securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
+    telemetryEvents?: TelemetryEventCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
     usageCounters?: UsageCounterCreateNestedManyWithoutUserInput
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
@@ -22391,6 +24078,7 @@ export namespace Prisma {
     memberships?: TeamMembershipUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
     securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
+    telemetryEvents?: TelemetryEventUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     usageCounters?: UsageCounterUncheckedCreateNestedManyWithoutUserInput
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
@@ -22425,6 +24113,7 @@ export namespace Prisma {
     memberships?: TeamMembershipUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
     securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
+    telemetryEvents?: TelemetryEventUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
     usageCounters?: UsageCounterUpdateManyWithoutUserNestedInput
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
@@ -22443,6 +24132,7 @@ export namespace Prisma {
     memberships?: TeamMembershipUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
     securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
+    telemetryEvents?: TelemetryEventUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     usageCounters?: UsageCounterUncheckedUpdateManyWithoutUserNestedInput
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
@@ -22461,6 +24151,7 @@ export namespace Prisma {
     memberships?: TeamMembershipCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogCreateNestedManyWithoutUserInput
     securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
+    telemetryEvents?: TelemetryEventCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
     usageCounters?: UsageCounterCreateNestedManyWithoutUserInput
     stripeCustomer?: StripeCustomerCreateNestedOneWithoutUserInput
@@ -22479,6 +24170,7 @@ export namespace Prisma {
     memberships?: TeamMembershipUncheckedCreateNestedManyWithoutUserInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
     securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
+    telemetryEvents?: TelemetryEventUncheckedCreateNestedManyWithoutUserInput
     refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
     usageCounters?: UsageCounterUncheckedCreateNestedManyWithoutUserInput
     stripeCustomer?: StripeCustomerUncheckedCreateNestedOneWithoutUserInput
@@ -22513,6 +24205,7 @@ export namespace Prisma {
     memberships?: TeamMembershipUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
     securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
+    telemetryEvents?: TelemetryEventUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
     usageCounters?: UsageCounterUpdateManyWithoutUserNestedInput
     stripeCustomer?: StripeCustomerUpdateOneWithoutUserNestedInput
@@ -22531,9 +24224,102 @@ export namespace Prisma {
     memberships?: TeamMembershipUncheckedUpdateManyWithoutUserNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
     securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
+    telemetryEvents?: TelemetryEventUncheckedUpdateManyWithoutUserNestedInput
     refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
     usageCounters?: UsageCounterUncheckedUpdateManyWithoutUserNestedInput
     stripeCustomer?: StripeCustomerUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserCreateWithoutTelemetryEventsInput = {
+    id?: string
+    email: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    plan?: string
+    stripeId?: string | null
+    entitlements?: NullableJsonNullValueInput | InputJsonValue
+    chats?: ChatCreateNestedManyWithoutUserInput
+    edits?: EditCreateNestedManyWithoutUserInput
+    memberships?: TeamMembershipCreateNestedManyWithoutUserInput
+    auditLogs?: AuditLogCreateNestedManyWithoutUserInput
+    securityEvents?: SecurityEventCreateNestedManyWithoutUserInput
+    refreshTokens?: RefreshTokenCreateNestedManyWithoutUserInput
+    usageCounters?: UsageCounterCreateNestedManyWithoutUserInput
+    stripeCustomer?: StripeCustomerCreateNestedOneWithoutUserInput
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutTelemetryEventsInput = {
+    id?: string
+    email: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    plan?: string
+    stripeId?: string | null
+    entitlements?: NullableJsonNullValueInput | InputJsonValue
+    chats?: ChatUncheckedCreateNestedManyWithoutUserInput
+    edits?: EditUncheckedCreateNestedManyWithoutUserInput
+    memberships?: TeamMembershipUncheckedCreateNestedManyWithoutUserInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutUserInput
+    securityEvents?: SecurityEventUncheckedCreateNestedManyWithoutUserInput
+    refreshTokens?: RefreshTokenUncheckedCreateNestedManyWithoutUserInput
+    usageCounters?: UsageCounterUncheckedCreateNestedManyWithoutUserInput
+    stripeCustomer?: StripeCustomerUncheckedCreateNestedOneWithoutUserInput
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutTelemetryEventsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutTelemetryEventsInput, UserUncheckedCreateWithoutTelemetryEventsInput>
+  }
+
+  export type UserUpsertWithoutTelemetryEventsInput = {
+    update: XOR<UserUpdateWithoutTelemetryEventsInput, UserUncheckedUpdateWithoutTelemetryEventsInput>
+    create: XOR<UserCreateWithoutTelemetryEventsInput, UserUncheckedCreateWithoutTelemetryEventsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutTelemetryEventsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutTelemetryEventsInput, UserUncheckedUpdateWithoutTelemetryEventsInput>
+  }
+
+  export type UserUpdateWithoutTelemetryEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    plan?: StringFieldUpdateOperationsInput | string
+    stripeId?: NullableStringFieldUpdateOperationsInput | string | null
+    entitlements?: NullableJsonNullValueInput | InputJsonValue
+    chats?: ChatUpdateManyWithoutUserNestedInput
+    edits?: EditUpdateManyWithoutUserNestedInput
+    memberships?: TeamMembershipUpdateManyWithoutUserNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutUserNestedInput
+    securityEvents?: SecurityEventUpdateManyWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUpdateManyWithoutUserNestedInput
+    usageCounters?: UsageCounterUpdateManyWithoutUserNestedInput
+    stripeCustomer?: StripeCustomerUpdateOneWithoutUserNestedInput
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutTelemetryEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    plan?: StringFieldUpdateOperationsInput | string
+    stripeId?: NullableStringFieldUpdateOperationsInput | string | null
+    entitlements?: NullableJsonNullValueInput | InputJsonValue
+    chats?: ChatUncheckedUpdateManyWithoutUserNestedInput
+    edits?: EditUncheckedUpdateManyWithoutUserNestedInput
+    memberships?: TeamMembershipUncheckedUpdateManyWithoutUserNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutUserNestedInput
+    securityEvents?: SecurityEventUncheckedUpdateManyWithoutUserNestedInput
+    refreshTokens?: RefreshTokenUncheckedUpdateManyWithoutUserNestedInput
+    usageCounters?: UsageCounterUncheckedUpdateManyWithoutUserNestedInput
+    stripeCustomer?: StripeCustomerUncheckedUpdateOneWithoutUserNestedInput
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type ChatCreateManyUserInput = {
@@ -22576,6 +24362,16 @@ export namespace Prisma {
     severity?: string
     ip?: string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type TelemetryEventCreateManyUserInput = {
+    id?: string
+    type: string
+    event: string
+    value?: number | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    version?: string | null
     createdAt?: Date | string
   }
 
@@ -22723,6 +24519,36 @@ export namespace Prisma {
     severity?: StringFieldUpdateOperationsInput | string
     ip?: NullableStringFieldUpdateOperationsInput | string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TelemetryEventUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    event?: StringFieldUpdateOperationsInput | string
+    value?: NullableFloatFieldUpdateOperationsInput | number | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    version?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TelemetryEventUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    event?: StringFieldUpdateOperationsInput | string
+    value?: NullableFloatFieldUpdateOperationsInput | number | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    version?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TelemetryEventUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    event?: StringFieldUpdateOperationsInput | string
+    value?: NullableFloatFieldUpdateOperationsInput | number | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    version?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

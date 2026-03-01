@@ -240,6 +240,17 @@ exports.Prisma.WebhookEventScalarFieldEnum = {
   processedAt: 'processedAt'
 };
 
+exports.Prisma.TelemetryEventScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  type: 'type',
+  event: 'event',
+  value: 'value',
+  metadata: 'metadata',
+  version: 'version',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.VerificationTokenScalarFieldEnum = {
   id: 'id',
   email: 'email',
@@ -289,6 +300,7 @@ exports.Prisma.ModelName = {
   StripeCustomer: 'StripeCustomer',
   Subscription: 'Subscription',
   WebhookEvent: 'WebhookEvent',
+  TelemetryEvent: 'TelemetryEvent',
   VerificationToken: 'VerificationToken'
 };
 

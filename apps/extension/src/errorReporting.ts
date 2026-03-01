@@ -23,9 +23,7 @@ export class ErrorReporting {
   private setupStatusBar(): void {
     const statusBarItem = vscode.window.createStatusBarItem(
       vscode.StatusBarAlignment.Right,
-      5000,
-      'ATiQ Support',
-      vscode.ThemeIcon.File
+      5000
     );
     statusBarItem.command = 'atiq.reportIssue';
     statusBarItem.tooltip = 'Report ATiQ Issue';
@@ -41,34 +39,32 @@ export class ErrorReporting {
   }
 
   public async showIssueDialog(error: Error, context?: string): Promise<void> {
-    const actions: vscode.MessageItem[] = [
-      { title: 'Report Issue', action: 'report' },
-      { title: 'Copy Error', action: 'copy' },
-      { title: 'Dismiss', action: 'dismiss' }
-    ];
+    const reportIssue = { title: 'Report Issue' } as vscode.MessageItem;
+    const copyError = { title: 'Copy Error' } as vscode.MessageItem;
+    const dismiss = { title: 'Dismiss' } as vscode.MessageItem;
     
     const selectedAction = await vscode.window.showErrorMessage(
       `❌ ${error.message}`,
-      actions,
-      { modal: true }
+      { modal: true },
+      reportIssue,
+      copyError,
+      dismiss
     );
 
-    this.addReport(error, selectedAction.action, context);
+    if (selectedAction) {
+      const action = selectedAction.title === 'Report Issue' ? 'report' :
+                    selectedAction.title === 'Copy Error' ? 'copy' : 'dismiss';
+      this.addReport(error, action, context);
+    }
   }
 
   private addReport(error: Error, action: string, context?: string): void {
     const timestamp = new Date();
     const report = {
-      error: {
-        message: error.message,
-        stack: error.stack,
-        name: error.name
-      },
-      extensionVersion: '1.0.0',
-      timestamp: timestamp.toISOString(),
-      context: context || 'Unknown context',
+      timestamp,
+      error,
       action,
-      userAgent: this.getUserAgent()
+      context: context || 'Unknown context'
     };
 
     this.recentReports.unshift(report);

@@ -95,6 +95,7 @@ describe("POST /auth/magiclink", () => {
       url: "/auth/magiclink",
       payload: { email: "test@example.com" },
     });
+    // Returns 200 successfully  
     expect(res.statusCode).toBe(200);
     expect(res.json().message).toContain("test@example.com");
   });

@@ -1,9 +1,27 @@
+"use strict";
 // ─────────────────────────────────────────────────────────────
 // ATiQ SDK — Typed API client
 // Used by: apps/web, apps/extension
 // ─────────────────────────────────────────────────────────────
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RateLimitError = exports.PlanLimitError = exports.AuthError = exports.AtiqError = void 0;
+exports.createClient = createClient;
 // ── Error Classes ─────────────────────────────────────────────
-export class AtiqError extends Error {
+class AtiqError extends Error {
     code;
     statusCode;
     hint;
@@ -17,24 +35,28 @@ export class AtiqError extends Error {
         this.name = "AtiqError";
     }
 }
-export class AuthError extends AtiqError {
+exports.AtiqError = AtiqError;
+class AuthError extends AtiqError {
     constructor(message = "Unauthorized", requestId) {
         super("UNAUTHENTICATED", message, 401, undefined, requestId);
         this.name = "AuthError";
     }
 }
-export class PlanLimitError extends AtiqError {
+exports.AuthError = AuthError;
+class PlanLimitError extends AtiqError {
     constructor(message = "Plan limit reached. Please upgrade.", requestId) {
         super("PLAN_LIMIT", message, 402, "Upgrade required", requestId);
         this.name = "PlanLimitError";
     }
 }
-export class RateLimitError extends AtiqError {
+exports.PlanLimitError = PlanLimitError;
+class RateLimitError extends AtiqError {
     constructor(message = "Daily limit reached.", requestId) {
         super("RATE_LIMIT", message, 429, "Quota reset tomorrow", requestId);
         this.name = "RateLimitError";
     }
 }
+exports.RateLimitError = RateLimitError;
 // ── Internal fetch helper ─────────────────────────────────────
 async function apiFetch(config, path, options = {}) {
     const url = `${config.apiUrl}${path}`;
@@ -223,7 +245,7 @@ function createInternalClient(config) {
     };
 }
 // ── Main factory ──────────────────────────────────────────────
-export function createClient(config) {
+function createClient(config) {
     return {
         auth: createAuthClient(config),
         user: createUserClient(config),
@@ -234,5 +256,4 @@ export function createClient(config) {
         internal: createInternalClient(config),
     };
 }
-export * from "../../shared/src/index.js";
-//# sourceMappingURL=index.js.map
+__exportStar(require("../../shared/src/index.js"), exports);

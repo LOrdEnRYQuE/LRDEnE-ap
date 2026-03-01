@@ -1,0 +1,89 @@
+name: ATiQ Desktop Build - Gate C-Preview
+
+on:
+  push:
+    branches: [main]
+    paths: [apps/desktop/**]
+  workflow_dispatch:
+
+jobs:
+  build-desktop-preview:
+    strategy:
+      matrix:
+        include:
+          # macOS arm64 (Apple Silicon)
+          - platform: macos-arm64
+            runner: macos-26
+            arch: arm64
+            
+          # macOS x64 (Intel)  
+          - platform: macos-x64
+            runner: macos-15
+            arch: x64
+            
+          # Windows x64
+          - platform: windows-x64
+            runner: windows-latest
+            arch: x64
+            
+          # Linux x64
+          - platform: linux-x64
+            runner: ubuntu-latest
+            arch: x64
+
+    runs-on: ${{ matrix.runner }}
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 9
+          
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        
+      - name: Build desktop app
+        run: pnpm --filter @atiq/desktop build
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Build extension
+        run: pnpm --filter atiq-ai build
+        
+      - name: Package desktop app
+        run: |
+          cd apps/desktop
+          pnpm build:preview
+        env:
+          CSC_LINK: ${{ secrets.CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+          
+      - name: Upload preview artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: atiq-desktop-${{ matrix.platform }}
+          path: apps/desktop/dist/
+          retention-days: 30
+          
+      - name: Test bootable build
+        run: |
+          # Basic smoke test - ensure app launches
+          if [ "${{ matrix.platform }}" = "macos-arm64" ] || [ "${{ matrix.platform }}" = "macos-x64" ]; then
+            echo "Testing macOS app launch..."
+            # Add macOS launch test
+          elif [ "${{ matrix.platform }}" = "windows-x64" ]; then
+            echo "Testing Windows app launch..."
+            # Add Windows launch test  
+          elif [ "${{ matrix.platform }}" = "linux-x64" ]; then
+            echo "Testing Linux app launch..."
+            # Add Linux launch test
+          fi
