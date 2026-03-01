@@ -24,5 +24,6 @@ electron.contextBridge.exposeInMainWorld("api", {
   getAppVersion: () => electron.ipcRenderer.invoke("get-app-version"),
   indexProject: () => electron.ipcRenderer.invoke("project:index"),
   searchSymbols: (query) => electron.ipcRenderer.invoke("project:search", query),
-  getStatus: () => electron.ipcRenderer.invoke("project:status")
+  getStatus: () => electron.ipcRenderer.invoke("project:status"),
+  readFile: (path) => electron.ipcRenderer.invoke("file:read", path)
 });
