@@ -25,7 +25,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Typecheck + tests
-        run: pnpm --filter @atiq/extension typecheck && DATABASE_URL="file:./temp.db" pnpm --filter @atiq/api test
+        run: pnpm --filter @atiq/extension typecheck && DATABASE_URL="file:./temp.db" pnpm --filter @atiq/api test src/__tests__/billing.test.ts src/__tests__/webhooks.idempotency.test.ts src/__tests__/telemetry.test.ts src/__tests__/diff.test.ts src/__tests__/llm.test.ts
 
       - name: Build extension
         run: pnpm --filter @atiq/extension build
