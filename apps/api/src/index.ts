@@ -16,6 +16,7 @@ import billingRoutes from "./routes/billing.js";
 import teamRoutes from "./routes/teams.js";
 import devRoutes from "./routes/dev.js";
 import internalRoutes from "./routes/internal.js";
+import telemetryRoutes from "./routes/telemetry.js";
 import stripeWebhookRoutes from "./routes/webhooks/stripe.js";
 
 // ── Startup Hygiene ───────────────────────────────────────────
@@ -99,6 +100,7 @@ async function main() {
   await app.register(billingRoutes);
   await app.register(teamRoutes);
   await app.register(internalRoutes);
+  await app.register(telemetryRoutes);
   await app.register(stripeWebhookRoutes);
 
   if (isDev) {

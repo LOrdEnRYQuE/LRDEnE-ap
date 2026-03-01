@@ -12,6 +12,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
@@ -25,7 +27,10 @@ jobs:
           cache: "pnpm"
 
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
+
+      - name: Prisma Generate
+        run: pnpm --filter @atiq/api exec prisma generate
 
       - name: Run Lint
         run: pnpm run -r lint
@@ -38,3 +43,9 @@ jobs:
 
       - name: Run Tests
         run: pnpm test
+        env:
+          DATABASE_URL: "file:./temp.db"
+
+      - name: Package Extension
+        working-directory: apps/extension
+        run: npx @vscode/vsce package --no-dependencies

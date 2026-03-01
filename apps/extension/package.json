@@ -1,8 +1,8 @@
 {
   "name": "atiq-ai",
   "displayName": "ATiQ AI",
-  "version": "1.0.0",
-  "description": "AI-powered coding assistant — real-time chat, inline edits (Cmd+K), repo-wide symbol search, and telemetry controls.",
+  "version": "1.0.1",
+  "description": "Professional AI-powered coding assistant for private and secure development. Features real-time chat, intelligent inline editing (Cmd+K), and comprehensive symbol indexing.",
   "publisher": "atiq",
   "icon": "media/icon.png",
   "repository": {
@@ -15,8 +15,10 @@
     "chat",
     "copilot",
     "inline-edit",
-    "diff",
-    "code-generation"
+    "refactor",
+    "testing",
+    "productivity",
+    "security"
   ],
   "engines": {
     "vscode": "^1.90.0"

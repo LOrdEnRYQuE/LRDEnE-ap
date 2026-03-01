@@ -25,15 +25,16 @@ model User {
   entitlements Json? // Snapshot of limits if overridden
 
   // Relations
-  chats          Chat[]
-  edits          Edit[]
-  memberships    TeamMembership[]
-  auditLogs      AuditLog[]
-  securityEvents SecurityEvent[]
-  refreshTokens  RefreshToken[]
-  usageCounters  UsageCounter[]
-  stripeCustomer StripeCustomer?
-  subscription   Subscription?
+  chats           Chat[]
+  edits           Edit[]
+  memberships     TeamMembership[]
+  auditLogs       AuditLog[]
+  securityEvents  SecurityEvent[]
+  telemetryEvents TelemetryEvent[]
+  refreshTokens   RefreshToken[]
+  usageCounters   UsageCounter[]
+  stripeCustomer  StripeCustomer?
+  subscription    Subscription?
 }
 
 model Team {
@@ -186,6 +187,20 @@ model Subscription {
 model WebhookEvent {
   id          String   @id // Stripe Event ID
   processedAt DateTime @default(now())
+}
+
+model TelemetryEvent {
+  id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  type      String // crash, feature_use, performance
+  event     String // extension.load_time, command.open_chat, etc.
+  value     Float? // for metrics
+  metadata  Json? // for stack traces, context, etc.
+  version   String? // extension version
+  createdAt DateTime @default(now())
+
+  @@index([type, createdAt])
 }
 
 model VerificationToken {

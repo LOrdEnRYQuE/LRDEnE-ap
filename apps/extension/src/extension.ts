@@ -13,10 +13,18 @@ import { AuthManager } from "./auth";
 import { IndexManager } from "./indexing/indexManager";
 import { ProjectMapProvider } from "./projectMap";
 import { TerminalCollector } from "./terminalCollector";
+import { ErrorHandler } from "./errorHandler";
+import { ErrorReporting } from "./errorReporting";
+import { TelemetryService } from "./telemetry";
 
 export async function activate(context: vscode.ExtensionContext): Promise<void> {
   AuthManager.getInstance().initialize(context);
   
+  // Initialize Observability
+  const errorHandler = ErrorHandler.getInstance();
+  const errorReporting = ErrorReporting.getInstance();
+  const telemetry = TelemetryService.getInstance();
+
   const indexer = IndexManager.getInstance(context);
   await indexer.initialize();
 
@@ -163,6 +171,20 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
       projectMapProvider.refresh();
     })
   );
+
+  // ── Observability Commands ───────────────────────────────
+  context.subscriptions.push(
+    vscode.commands.registerCommand("atiq.reportIssue", (errorInfo?: any) => {
+      // In a real app, this would open a webview or browser with pre-filled error data
+      vscode.window.showInformationMessage("Opening issue report form...");
+      if (errorInfo) {
+        telemetry.recordInteraction("error_reported", 0);
+        console.log("Reported Error Info:", errorInfo);
+      }
+    })
+  );
+
+  telemetry.recordInteraction("extension_activated");
 }
 
 function updateIndexStatusBar(statusBar: vscode.StatusBarItem) {

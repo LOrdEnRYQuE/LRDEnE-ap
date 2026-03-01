@@ -74,7 +74,7 @@ export class TelemetryService {
     this.performanceMetrics[name] = (this.performanceMetrics[name] || 0) + value;
   }
 
-  public getMetrics(): {
+  public getMetrics() {
     return {
       performance: this.performanceMetrics,
       systemHealth: this.systemHealth,
