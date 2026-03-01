@@ -55,7 +55,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Build extension
-        run: pnpm --filter atiq-ai build
+        run: pnpm --filter @atiq/extension build
         
       - name: Package desktop app
         run: |
