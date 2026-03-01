@@ -23,7 +23,7 @@ export class ErrorReporting {
   private setupStatusBar(): void {
     const statusBarItem = vscode.window.createStatusBarItem(
       vscode.StatusBarAlignment.Right,
-      5000
+      5000,
       'ATiQ Support',
       vscode.ThemeIcon.File
     );
@@ -40,15 +40,20 @@ export class ErrorReporting {
     });
   }
 
-  public showIssueDialog(error: Error, context?: string): void {
-    const actions = ['Report Issue', 'Copy Error', 'Dismiss'];
+  public async showIssueDialog(error: Error, context?: string): Promise<void> {
+    const actions: vscode.MessageItem[] = [
+      { title: 'Report Issue', action: 'report' },
+      { title: 'Copy Error', action: 'copy' },
+      { title: 'Dismiss', action: 'dismiss' }
+    ];
+    
     const selectedAction = await vscode.window.showErrorMessage(
       `❌ ${error.message}`,
-      ...actions,
+      actions,
       { modal: true }
     );
 
-    this.addReport(error, selectedAction, context);
+    this.addReport(error, selectedAction.action, context);
   }
 
   private addReport(error: Error, action: string, context?: string): void {
