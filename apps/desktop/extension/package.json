@@ -1,0 +1,73 @@
+{
+  "name": "@atiq/extension",
+  "displayName": "ATiQ AI",
+  "version": "0.1.0",
+  "description": "AI-powered coding assistant — chat, inline edits, and intelligent suggestions",
+  "publisher": "atiq",
+  "icon": "media/icon.png",
+  "engines": { "vscode": "^1.90.0" },
+  "categories": ["AI", "Other"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      { "command": "atiq.openChat",   "title": "ATiQ: Open Chat",       "category": "ATiQ" },
+      { "command": "atiq.fixCode",    "title": "ATiQ: Fix This",        "category": "ATiQ" },
+      { "command": "atiq.rewrite",    "title": "ATiQ: Rewrite / Optimize", "category": "ATiQ" },
+      { "command": "atiq.writeTests", "title": "ATiQ: Write Tests",     "category": "ATiQ" },
+      { "command": "atiq.explain",    "title": "ATiQ: Explain Code",    "category": "ATiQ" },
+      { "command": "atiq.rebuildIndex", "title": "ATiQ: Rebuild Symbol Index", "category": "ATiQ" },
+      { "command": "atiq.clearIndex",   "title": "ATiQ: Clear Symbol Index",   "category": "ATiQ" },
+      { "command": "atiq.showIndexStatus", "title": "ATiQ: Index Status",      "category": "ATiQ" }
+    ],
+    "menus": {
+      "editor/context": [
+        { "command": "atiq.fixCode",    "when": "editorHasSelection", "group": "atiq@1" },
+        { "command": "atiq.rewrite",    "when": "editorHasSelection", "group": "atiq@2" },
+        { "command": "atiq.writeTests", "when": "editorHasSelection", "group": "atiq@3" },
+        { "command": "atiq.explain",    "when": "editorHasSelection", "group": "atiq@4" }
+      ]
+    },
+    "configuration": {
+      "title": "ATiQ",
+      "properties": {
+        "atiq.apiUrl": {
+          "type": "string",
+          "default": "http://localhost:8787",
+          "description": "ATiQ API server URL"
+        },
+        "atiq.token": {
+          "type": "string",
+          "default": "dev-pro",
+          "description": "ATiQ auth token (use dev-free, dev-pro, or dev-team for development)"
+        },
+        "atiq.model": {
+          "type": "string",
+          "default": "gpt-4o-mini",
+          "description": "Default AI model to use"
+        }
+      }
+    },
+    "keybindings": [
+      { "command": "atiq.openChat", "key": "ctrl+alt+a", "mac": "cmd+ctrl+a" }
+    ]
+  },
+  "scripts": {
+    "dev": "tsc -w -p tsconfig.json",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit",
+    "package": "vsce package",
+    "clean": "rm -rf dist *.vsix"
+  },
+  "dependencies": {
+    "@atiq/sdk": "workspace:*",
+    "@atiq/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/vscode": "^1.90.0",
+    "typescript": "^5.7.3",
+    "@vscode/vsce": "^3.0.0"
+  },
+  "private": true
+}

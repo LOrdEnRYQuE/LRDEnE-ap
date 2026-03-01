@@ -1,0 +1,38 @@
+# ─────────────────────────────────────────────────────────────
+# ATiQ Extension — .vscodeignore
+# Anything listed here is excluded from the .vsix package.
+# ─────────────────────────────────────────────────────────────
+
+# Source (compiled output in dist/ is included)
+src/
+tsconfig.json
+
+# Tests
+**/__tests__/
+**/*.test.ts
+**/*.spec.ts
+
+# Config / tooling
+.turbo/
+.eslintrc*
+eslint.config.*
+.prettierrc*
+
+# Dev artifacts
+*.map
+*.tsbuildinfo
+.env
+.env.*
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Docs and CI (not needed in vsix)
+CHANGELOG.md
+CONTRIBUTING.md
+*.md
+!README.md
+
+# Never package node_modules (vsce handles bundling)
+node_modules/

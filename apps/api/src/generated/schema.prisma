@@ -1,0 +1,199 @@
+// ─────────────────────────────────────────────────────────────
+// ATiQ Editor — Prisma Schema
+// Single source of truth for Users, Subscriptions, and Logs.
+// ─────────────────────────────────────────────────────────────
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Subscription info
+  plan         String  @default("free") // free, pro, team, enterprise
+  stripeId     String? @unique
+  entitlements Json? // Snapshot of limits if overridden
+
+  // Relations
+  chats          Chat[]
+  edits          Edit[]
+  memberships    TeamMembership[]
+  auditLogs      AuditLog[]
+  securityEvents SecurityEvent[]
+  refreshTokens  RefreshToken[]
+  usageCounters  UsageCounter[]
+  stripeCustomer StripeCustomer?
+  subscription   Subscription?
+}
+
+model Team {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Settings
+  plan     String  @default("team")
+  stripeId String? @unique
+
+  // Relations
+  members   TeamMembership[]
+  auditLogs AuditLog[]
+}
+
+model TeamMembership {
+  id   String @id @default(cuid())
+  role String @default("member") // owner, admin, member
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  teamId String
+  team   Team   @relation(fields: [teamId], references: [id])
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, teamId])
+}
+
+model Chat {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  prompt   String
+  response String?
+  model    String?
+  tokens   Int?    @default(0)
+
+  createdAt DateTime @default(now())
+}
+
+model Edit {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  instruction String
+  fileContent String
+  diff        String?
+  language    String?
+
+  createdAt DateTime @default(now())
+}
+
+model AuditLog {
+  id     String @id @default(cuid())
+  teamId String
+  team   Team   @relation(fields: [teamId], references: [id])
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  action   String // member_invite, plan_change, settings_update
+  entityId String? // id of the affected entity
+  metadata Json? // additional context
+
+  createdAt DateTime @default(now())
+}
+
+model SecurityEvent {
+  id     String  @id @default(cuid())
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
+
+  type     String // rate_limit_hit, invalid_auth, plan_abuse
+  severity String  @default("info") // info, warning, critical
+  ip       String?
+  metadata Json?
+
+  createdAt DateTime @default(now())
+}
+
+model RefreshToken {
+  id          String @id @default(cuid())
+  hashedToken String @unique
+  userId      String
+  user        User   @relation(fields: [userId], references: [id])
+
+  issuedAt          DateTime  @default(now())
+  expiresAt         DateTime
+  revokedAt         DateTime?
+  replacedByTokenId String?
+
+  createdAt DateTime @default(now())
+}
+
+model UsageCounter {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id])
+
+  chatCount Int    @default(0)
+  editCount Int    @default(0)
+  date      String // YYYY-MM-DD
+
+  createdAt DateTime @default(now())
+
+  @@unique([userId, date])
+}
+
+model UsageEvent {
+  id              String  @id @default(cuid())
+  userId          String
+  clientRequestId String  @unique // UUID from client for idempotency
+  type            String // chat, edit
+  status          String // started, completed, cancelled, failed
+  model           String?
+  tokens          Int?    @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId, createdAt])
+}
+
+model StripeCustomer {
+  id               String   @id @default(cuid())
+  userId           String   @unique
+  user             User     @relation(fields: [userId], references: [id])
+  stripeCustomerId String   @unique
+  createdAt        DateTime @default(now())
+}
+
+model Subscription {
+  id                   String   @id @default(cuid())
+  userId               String   @unique
+  user                 User     @relation(fields: [userId], references: [id])
+  stripeSubscriptionId String   @unique
+  status               String
+  plan                 String
+  currentPeriodEnd     DateTime
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+}
+
+model WebhookEvent {
+  id          String   @id // Stripe Event ID
+  processedAt DateTime @default(now())
+}
+
+model VerificationToken {
+  id        String   @id @default(cuid())
+  email     String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@unique([email, token])
+}

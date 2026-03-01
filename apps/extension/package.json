@@ -1,0 +1,222 @@
+{
+  "name": "atiq-ai",
+  "displayName": "ATiQ AI",
+  "version": "1.0.0",
+  "description": "AI-powered coding assistant — real-time chat, inline edits (Cmd+K), repo-wide symbol search, and telemetry controls.",
+  "publisher": "atiq",
+  "icon": "media/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atiq-ai/atiq-editor"
+  },
+  "keywords": [
+    "ai",
+    "assistant",
+    "chat",
+    "copilot",
+    "inline-edit",
+    "diff",
+    "code-generation"
+  ],
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "AI",
+    "Programming Languages",
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "atiq-sidebar",
+          "title": "ATiQ AI",
+          "icon": "media/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "atiq-sidebar": [
+        {
+          "id": "atiq-project-map",
+          "name": "Project Map",
+          "type": "tree",
+          "icon": "$(database)"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "atiq.openChat",
+        "title": "ATiQ: Open Chat",
+        "category": "ATiQ"
+      },
+      {
+        "command": "atiq.editSelection",
+        "title": "ATiQ: Edit Selection...",
+        "category": "ATiQ"
+      },
+      {
+        "command": "atiq.fixCode",
+        "title": "ATiQ: Fix This",
+        "category": "ATiQ"
+      },
+      {
+        "command": "atiq.rewrite",
+        "title": "ATiQ: Rewrite / Optimize",
+        "category": "ATiQ"
+      },
+      {
+        "command": "atiq.writeTests",
+        "title": "ATiQ: Write Tests",
+        "category": "ATiQ"
+      },
+      {
+        "command": "atiq.explain",
+        "title": "ATiQ: Explain Code",
+        "category": "ATiQ"
+      },
+      {
+        "command": "atiq.rebuildIndex",
+        "title": "ATiQ: Rebuild Symbol Index",
+        "category": "ATiQ"
+      },
+      {
+        "command": "atiq.clearIndex",
+        "title": "ATiQ: Clear Symbol Index",
+        "category": "ATiQ"
+      },
+      {
+        "command": "atiq.showIndexStatus",
+        "title": "ATiQ: Index Status",
+        "category": "ATiQ"
+      },
+      {
+        "command": "atiq.login",
+        "title": "ATiQ: Login",
+        "category": "ATiQ"
+      },
+      {
+        "command": "atiq.logout",
+        "title": "ATiQ: Logout",
+        "category": "ATiQ"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "atiq.editSelection",
+          "when": "editorHasSelection",
+          "group": "atiq@0"
+        },
+        {
+          "command": "atiq.fixCode",
+          "when": "editorHasSelection",
+          "group": "atiq@1"
+        },
+        {
+          "command": "atiq.rewrite",
+          "when": "editorHasSelection",
+          "group": "atiq@2"
+        },
+        {
+          "command": "atiq.writeTests",
+          "when": "editorHasSelection",
+          "group": "atiq@3"
+        },
+        {
+          "command": "atiq.explain",
+          "when": "editorHasSelection",
+          "group": "atiq@4"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "ATiQ",
+      "properties": {
+        "atiq.apiUrl": {
+          "type": "string",
+          "default": "http://localhost:8787",
+          "description": "ATiQ API server URL"
+        },
+        "atiq.telemetryEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Send anonymous usage telemetry and code snippets (for improvement)"
+        }
+      }
+    },
+    "walkthroughs": [
+      {
+        "id": "atiq-welcome",
+        "title": "Welcome to ATiQ AI",
+        "description": "Get started with your new AI-powered coding pair.",
+        "steps": [
+          {
+            "id": "atiq-login",
+            "title": "Sign in to ATiQ",
+            "description": "Use your Magic Link to sign in. This unlocks your plan features and daily AI quotas.\n[Sign In](command:atiq.login)",
+            "media": {
+              "image": "media/welcome.webp",
+              "altText": "ATiQ Login"
+            }
+          },
+          {
+            "id": "atiq-chat",
+            "title": "Open AI Chat",
+            "description": "Hit Cmd+Shift+A (Mac) or Ctrl+Alt+A (Windows) to open the ATiQ chat panel. Ask anything about your project.\n[Open Chat](command:atiq.openChat)",
+            "media": {
+              "markdown": "media/chat.md"
+            }
+          },
+          {
+            "id": "atiq-edit",
+            "title": "Magic Inline Edits",
+            "description": "Highlight code and press **Cmd+K**. ATiQ will generate a diff that you can review or reject.\n[Try Cmd+K](command:atiq.editSelection)",
+            "media": {
+              "image": "media/edit.webp",
+              "altText": "Inline Edits"
+            }
+          }
+        ]
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "atiq.openChat",
+        "key": "ctrl+alt+a",
+        "mac": "cmd+ctrl+a"
+      },
+      {
+        "command": "atiq.editSelection",
+        "key": "ctrl+k",
+        "mac": "cmd+k",
+        "when": "editorTextFocus && editorHasSelection"
+      }
+    ]
+  },
+  "scripts": {
+    "dev": "esbuild src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --platform=node --format=cjs --watch",
+    "build": "esbuild src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --platform=node --format=cjs --minify",
+    "typecheck": "tsc --noEmit",
+    "package": "vsce package --no-dependencies",
+    "clean": "rm -rf dist *.vsix"
+  },
+  "dependencies": {
+    "@atiq/sdk": "workspace:*",
+    "@atiq/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/vscode": "^1.90.0",
+    "@vscode/vsce": "^3.0.0",
+    "esbuild": "^0.27.3",
+    "typescript": "^5.7.3"
+  },
+  "private": true
+}

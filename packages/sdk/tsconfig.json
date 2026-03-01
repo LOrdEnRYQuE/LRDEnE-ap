@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "lib",
+    "paths": {
+      "@atiq/shared": ["../shared/src"]
+    }
+  },
+  "include": ["src"],
+  "exclude": ["src/__tests__"]
+}
