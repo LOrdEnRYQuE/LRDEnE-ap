@@ -227,3 +227,4 @@ export function deactivate(): void {
 // CI trigger 2
 // CI trigger 3
 // trigger final build with correct version
+// trigger build with VSCE packaging
