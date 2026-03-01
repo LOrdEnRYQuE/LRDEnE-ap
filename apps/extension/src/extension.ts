@@ -223,3 +223,4 @@ export function deactivate(): void {
   // No additional cleanup needed
 }
 
+// CI trigger
