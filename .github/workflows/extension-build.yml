@@ -28,7 +28,10 @@ jobs:
         run: pnpm --filter @atiq/extension typecheck && DATABASE_URL="file:./temp.db" pnpm --filter @atiq/api test src/__tests__/billing.test.ts src/__tests__/webhooks.idempotency.test.ts src/__tests__/telemetry.test.ts src/__tests__/diff.test.ts src/__tests__/llm.test.ts
 
       - name: Build extension
-        run: pnpm --filter @atiq/extension build
+        run: |
+          cd apps/extension
+          pnpm build
+          npx @vscode/vsce package --no-dependencies
 
       - name: Upload VSIX artifact
         uses: actions/upload-artifact@v4
