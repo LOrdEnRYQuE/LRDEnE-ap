@@ -1,0 +1,65 @@
+name: Desktop Preview Build
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "v*"
+      - "desktop-preview-*"
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-26
+            target: vscode-darwin-arm64-min
+          - os: windows-latest  
+            target: vscode-win32-x64-min
+          - os: ubuntu-latest
+            target: vscode-linux-x64-min
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: "apps/desktop/core/.nvmrc"
+          cache: "npm"
+          cache-dependency-path: "apps/desktop/core/package-lock.json"
+
+      - name: Build Desktop (npm + gulp)
+        working-directory: apps/desktop/core
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p .logs
+          npm config set cache "$(pwd)/.npm_cache"
+          npm install 2>&1 | tee .logs/npm-install.log
+
+          # If your fork uses a different compile script, replace this line.
+          # You mentioned compile-build exists; keep it.
+          npm run compile-build 2>&1 | tee .logs/compile.log
+
+          npm run gulp -- ${{ matrix.target }} 2>&1 | tee .logs/gulp.log
+
+          echo "Build outputs:"
+          find . -maxdepth 4 -type f \( -name "*.zip" -o -name "*.tar.gz" -o -name "*.dmg" -o -name "*.exe" -o -name "*.AppImage" \) -print || true
+
+      - name: Upload Desktop Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: desktop-${{ matrix.os }}-${{ matrix.target }}
+          path: |
+            VSCode*/**/*.zip
+            VSCode*/**/*.tar.gz
+            VSCode*/**/*.dmg
+            VSCode*/**/*.exe
+            VSCode*/**/*.AppImage
+            .logs/**
+          if-no-files-found: error
